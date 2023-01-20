@@ -14,22 +14,22 @@ class controleurUtilisateur
 {
   private PdoNetflixio $bdd;
 
-  public function index()
-  {
-    // Récupère la liste des utilisateurs depuis la base de données
-    $users = $this->bdd->getUsersFromDB();
-
-    // Affiche la vue avec la liste des utilisateurs
-    include 'vues/utilisateurs.php';
-  }
-
-  public function show($id)
+  public function getDashboard($id)
   {
     // Récupère les informations de l'utilisateur depuis la base de données
     $user = $this->bdd->getUserFromDB($id);
 
     // Affiche la vue avec les informations de l'utilisateur
-    include 'vues/utilisateur.php';
+    include 'vues/dashboard.php.php';
+  }
+
+  /**
+  * Récupère la page de connexion avec éventuellement un username en paramètre afin de préremplir le champ
+  * @param string $username nom de l'utilisateur facultatif pour préremplir le champ
+  */
+
+  public function connexionPage(string $username = ""){
+
   }
 }
 

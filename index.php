@@ -22,12 +22,12 @@ if(isset($_GET['action']))
 
   // Appelle la méthode correspondante du contrôleur
   if ($action == 'index') {
-    $controleur->index();
-  } elseif ($action == 'show') {
-    $controleur->show($_GET['id']);
+    $controleur->connexionPage();
+  } elseif ($action == 'profil' OR $action == 'dashboard') {
+    $controleur->getDashboard($_GET['id']);
   } else {
     // Affiche une erreur si l'action est inconnue
-    echo "Erreur : action inconnue.";
+    
   }
 
 
