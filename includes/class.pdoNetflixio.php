@@ -17,9 +17,10 @@ class PdoNetflixio
 
     public function __construct()
     {
+        
         try {
             $ini = parse_ini_file(__DIR__ . '/../app.ini');
-
+            
             $this->user = $ini['db_user'];
             $this->mdp = $ini['db_password'];
             $this->serveur = $ini['db_host'];
@@ -27,10 +28,12 @@ class PdoNetflixio
 
             //  die("mysql:host=".$this->serveur.';' .'dbname='.$this->bdd) ; 
             $this->instancePdo = new PDO("mysql:host=" . $this->serveur . ';' . 'dbname=' . $this->bdd, $this->user, $this->mdp);
+
             $this->instancePdo->query("SET CHARACTER SET utf8");
         }catch (PDOException $e)
         {
             $e->getMessage();
+            echo $e;
         }
     }
 
@@ -78,8 +81,11 @@ class PdoNetflixio
     */
     public function getContentsFromDB()
     {
-        $req = sprintf("SELECT id, title, release_year, number_of_seasons, rating, k.libelle FROM `tv_shows` AS a JOIN kinds AS k ON a.kind_id = k.id WHERE 1");
+        $req = sprintf("
+            SELECT id, title, duration, number_of_seasons, rating, release_year FROM ( SELECT CONCAT(ts.id, '_tv') AS id, ts.title AS title, NULL AS duration, ts.number_of_seasons, ts.rating, ts.release_year FROM tv_shows AS ts WHERE ts.title = 'movie1' UNION ALL SELECT CONCAT(m.id, '_m') AS id, m.title AS title, m.duration, NULL AS number_of_seasons, m.rating, m.release_year FROM movies AS m WHERE 1 AS t
+        ");
         $stmt = $this->instancePdo->prepare($req);
+        print_r($stmt);
         $stmt->execute();
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -91,13 +97,12 @@ class PdoNetflixio
     * @return array Contient les données d'un contenu vidéo de la base de données dont l'id correspond
     *
     * @param int $id Identifiant d'un contenu vidéo dans la base de données
-    * @param mixed $type Genre du contenu, "movies" ou 1, "tv_shows" ou 2
+    * @param bool $type Genre du contenu, "movies" = 0, "tv_shows" = 1
     * @access public
     */
     public function getContentFromDB($id, $type)
     {
-        if($type == 1){ $type = "movies"; }
-        else if($type == 2){ $type = "tv_shows";};
+        $type = $type ? "tv_shows" : "movies";
 
         $req = sprintf("SELECT title, release_year, duration, rating FROM %s WHERE id = %s", $this->instancePdo->quote($type), $this->instancePdo->quote($id));
         $stmt = $this->instancePdo->prepare($req);

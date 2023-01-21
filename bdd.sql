@@ -3,7 +3,7 @@ CREATE DATABASE IF NOT EXISTS `netflixio`;
 USE `netflixio`;
 
 CREATE TABLE users (
-  id INTEGER PRIMARY KEY,
+  id INTEGER AUTO_INCREMENT PRIMARY KEY,
   username VARCHAR(255) NOT NULL,
   password VARCHAR(255) NOT NULL,
   email VARCHAR(255) NOT NULL,
@@ -12,7 +12,7 @@ CREATE TABLE users (
 );
 
 CREATE TABLE movies (
-  id INTEGER PRIMARY KEY,
+  id INTEGER AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(255) NOT NULL,
   release_year INTEGER NOT NULL,
   duration INTEGER NOT NULL,
@@ -20,7 +20,7 @@ CREATE TABLE movies (
 );
 
 CREATE TABLE tv_shows (
-  id INTEGER PRIMARY KEY,
+  id INTEGER AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(255) NOT NULL,
   release_year INTEGER NOT NULL,
   number_of_seasons INTEGER NOT NULL,
@@ -28,13 +28,20 @@ CREATE TABLE tv_shows (
 );
 
 CREATE TABLE episodes (
-  id INTEGER PRIMARY KEY,
+  id INTEGER AUTO_INCREMENT PRIMARY KEY,
   tv_show_id INTEGER NOT NULL,
   season_number INTEGER NOT NULL,
   episode_number INTEGER NOT NULL,
   duration INTEGER NOT NULL,
   rating FLOAT NOT NULL,
   FOREIGN KEY (tv_show_id) REFERENCES tv_shows(id)
+);
+
+CREATE TABLE contentProfiles(
+  id INTEGER AUTO_INCREMENT PRIMARY KEY,
+  idContent INTEGER NOT NULL,
+  url_affiche VARCHAR(255),
+  FOREIGN KEY (idContent) REFERENCES 
 );
 
 CREATE TABLE user_watch_history (

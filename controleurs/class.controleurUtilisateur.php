@@ -9,7 +9,6 @@
 
 include "includes/class.pdoNetflixio.php";
 
-
 class controleurUtilisateur
 {
   private PdoNetflixio $bdd;
@@ -24,12 +23,31 @@ class controleurUtilisateur
   }
 
   /**
-  * Récupère la page de connexion avec éventuellement un username en paramètre afin de préremplir le champ
-  * @param string $username nom de l'utilisateur facultatif pour préremplir le champ
-  */
+   * Page connexion
+   */
+  public function getConnexionPage(){
+    include dirname(__DIR__) . '/vues/pageConnexion.php';
+  }
+  
+  /**
+   * Page d'accueil
+   */
+  public function getAccueilPage(){
+    include dirname(__DIR__) . '/vues/accueil.php';
+  }
 
-  public function connexionPage(string $username = ""){
+  /**
+   * Page profil
+   */
+  public function getPageProfil(string $username = ""){
+    include dirname(__DIR__) . '/vues/pageProfil.php';
+  }
 
+  /**
+   * Page 404
+   */
+  public function getNotFoundPage($e = NULL){
+    include dirname(__DIR__) . '/vues/notFoundPage.php';
   }
 }
 

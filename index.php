@@ -12,22 +12,13 @@ include "controleurs/class.controleurUtilisateur.php";
 // Crée une instance du contrôleur
 $controleur = new controleurUtilisateur();
 
-if(isset($_GET['action']))
-{
-  // Récupère l'action demandée dans l'URL
-  $action = $_GET['action'];
-}else{
-  $action = '404';
-}
+$action = isset($_GET['action']) ? $_GET['action'] : 'accueil';
 
   // Appelle la méthode correspondante du contrôleur
-  if ($action == 'index') {
-    $controleur->connexionPage();
-  } elseif ($action == 'profil' OR $action == 'dashboard') {
-    $controleur->getDashboard($_GET['id']);
-  } else {
-    // Affiche une erreur si l'action est inconnue
-    
-  }
+  match ($action) {
+    'accueil' => $controleur->getAccueilPage(),
+    'profil' => $controleur->getPageProfil($_GET['id']),
+    default => $controleur->getNotFoundPage(), // Affiche une erreur si l'action est inconnue
+};
 
 
