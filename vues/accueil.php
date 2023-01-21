@@ -23,10 +23,8 @@
       <p style="display:inline-block" href="#" class="nav-item">Offres désormais disponibles à partir de <strong>5,99 €</strong>./mois</p> <a class="ensavoirplus" href="">En savoir plus</a>
     </div>
   </div>
-  <div class="container">
-    <h1 class="title">Nouveautés</h1>
-
-    <?= $mesc->lesCartesAffichesStandard($bdd->getContentsFromDB(), 5); ?>
+  <div class="container mainContainer">
+    <?= $mesc->lesCartesAffichesStandard($bdd->getContentsFromDB(), 2); ?>
     <!-- https://flxt.tmsimg.com/assets/p9932851_b_h9_ab.jpg FUTURAMA -->
   </div>
 </body>
@@ -53,6 +51,7 @@
     display: flex;
     justify-content: space-between;
     padding: 0px 20px;
+    margin-bottom: 60px;
   }
 
   .nouveau{
@@ -64,6 +63,14 @@
     font-weight: 700;
     padding: 5px 10px;
     text-transform: uppercase;
+  }
+
+  .row{
+    background-color: green;
+  }
+
+  .mainContainer{
+    display: flex;
   }
 
   .ensavoirplus{
@@ -81,10 +88,14 @@
     padding: 0 10px;
   }
 
+  .carteAffiche:hover{
+    z-index:99;
+  }
+
   /* Styles des conteneurs */
   .container {
     max-width: 1200px;
-    margin: 0 auto;
+    margin: auto;
   }
 
   /* Styles des titres */
@@ -110,15 +121,18 @@
     background-color: #f5f5f5;
     overflow: hidden;
 
-    width: -webkit-fill-available;
+
     transition: .3s;
   }
   .image-container:hover{
     transform: scale(1.1);
+    z-index: 99;
   }
 
   .thumbnail img {
-    width: inherit;
+    /* width: inherit;
+    width: -webkit-fill-available; */
+    width: -moz-available;
   }
 
   .caption {

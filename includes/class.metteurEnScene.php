@@ -19,7 +19,7 @@ class MetteurEnScene {
      */
     private function carteAfficheStandard($titre_contenu, $url_affiche){
         echo '
-        <a href="">
+        <a href="" class="carteAffiche">
             <div class="image-container">
             <img class="thumbnail" src="'.$url_affiche.'" class="blurred-image">
             <div class="overlay-text">
@@ -31,10 +31,19 @@ class MetteurEnScene {
     }
 
     public function lesCartesAffichesStandard(array $contenus, int $row_size){
-        foreach($contenus as $i => $contenu){
-            if($i % $row_size == 0){
-                $this->carteAfficheStandard($contenu['titre_contenu'], $contenu['url_affiche']);
+        $ft = true;
+        $i = 0;
+        foreach($contenus as $contenu){
+            $i++;
+            if ($i == $row_size OR $ft){
+                echo '<div class="row">';
             }
-        }
+            $this->carteAfficheStandard($contenu['titre_contenu'], $contenu['url_affiche']);
+            if ($i == $row_size){
+                echo '</div>';
+                $i = 0;
+            }
+            $ft = false;
+        } // à fixer
     }
 }

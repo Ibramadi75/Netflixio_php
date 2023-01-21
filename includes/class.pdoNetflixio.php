@@ -76,16 +76,17 @@ class PdoNetflixio
     *
     * @return array Contient les données du contenu vidéo dont l'id correspond
     *
-    * @param int $id Identifiant du contenu vidéo dans la base de données
+    * @param bool $affiche Récupérer les films seulement si ils ont une affiche
     * @access public
     */
-    public function getContentsFromDB()
+    public function getContentsFromDB(bool $affiche = FALSE)
     {
+        $jointure = $affiche ? "LEFT JOIN" : "INNER JOIN";
+        // on récupère les films et leurs affiches
         $req = sprintf("
-            SELECT id, title, duration, number_of_seasons, rating, release_year FROM ( SELECT CONCAT(ts.id, '_tv') AS id, ts.title AS title, NULL AS duration, ts.number_of_seasons, ts.rating, ts.release_year FROM tv_shows AS ts WHERE ts.title = 'movie1' UNION ALL SELECT CONCAT(m.id, '_m') AS id, m.title AS title, m.duration, NULL AS number_of_seasons, m.rating, m.release_year FROM movies AS m WHERE 1 AS t
-        ");
+            SELECT c.id, c.title AS titre_contenu, c.release_year, c.duration, c.number_of_seasons, cp.url_affiche, c.rating FROM contents AS c %s contents_profiles AS cp ON cp.idContent = c.id
+        ", $jointure);
         $stmt = $this->instancePdo->prepare($req);
-        print_r($stmt);
         $stmt->execute();
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
