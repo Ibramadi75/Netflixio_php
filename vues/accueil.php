@@ -23,25 +23,44 @@
       <p style="display:inline-block" href="#" class="nav-item">Offres désormais disponibles à partir de <strong>5,99 €</strong>./mois</p> <a class="ensavoirplus" href="">En savoir plus</a>
     </div>
   </div>
+    <img id="Netflixio_Logo" src="vues\contents\Netflixio_Logo.png" alt="Logo netflixio">
   <div class="container mainContainer">
-    <?= $mesc->lesCartesAffichesStandard($bdd->getContentsFromDB(), 2); ?>
     <!-- https://flxt.tmsimg.com/assets/p9932851_b_h9_ab.jpg FUTURAMA -->
+    <?php require_once __DIR__ . '\composants\formulaire_connexion.php'; ?>
   </div>
 </body>
 
 </html>
 
 <style>
+  @font-face {
+  font-family: 'BebasNeue';
+  src: url('BebasNeue.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  }
+
   /* Styles Globaux */
+  *{
+    font-family: "BebasNeue", sans-serif;
+  }
   body {
-    font-family: Arial, sans-serif;
+    /* font-family: Arial, sans-serif; */
     margin: 0;
     padding: 0;
     background: #123347;
 
     min-width: 100vw;
     min-height: 100vh;
-    background: linear-gradient(43deg, #cc080a 0%, #e55c5c 35%, #122b42 90%);
+    /* background: linear-gradient(43deg, #cc080a 0%, #e55c5c 35%, #122b42 90%); */
+    background-image: url("https://help.nflxext.com/0af6ce3e-b27a-4722-a5f0-e32af4df3045_what_is_netflix_5_en.png");
+    background-size: cover;
+  }
+  #Netflixio_Logo{
+    position: absolute;
+    top: 90px;
+    left: 20px;
+    width: 140px;
   }
 
   /* Styles de la barre de navigation */
@@ -66,11 +85,17 @@
   }
 
   .row{
-    background-color: green;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    margin: 10px;
   }
 
   .mainContainer{
+    height: 60vh;
     display: flex;
+    flex-wrap: wrap;
+    align-items: center;
   }
 
   .ensavoirplus{
@@ -110,7 +135,7 @@
   }
 
   .image-container {
-    width:300px;
+    width:170px;
     height: 220px;
     transition: .3s;
     transform: scale(1);
@@ -120,8 +145,7 @@
   .thumbnail {
     background-color: #f5f5f5;
     overflow: hidden;
-
-
+    width:-moz-available;
     transition: .3s;
   }
   .image-container:hover{

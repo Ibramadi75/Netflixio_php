@@ -30,20 +30,18 @@ class MetteurEnScene {
         ';
     }
 
-    public function lesCartesAffichesStandard(array $contenus, int $row_size){
-        $ft = true;
+    public function lesCartesAffichesStandard(array $contenus, int $row_size){ 
         $i = 0;
         foreach($contenus as $contenu){
-            $i++;
-            if ($i == $row_size OR $ft){
+            if($i == 0):
                 echo '<div class="row">';
-            }
+            endif;
             $this->carteAfficheStandard($contenu['titre_contenu'], $contenu['url_affiche']);
-            if ($i == $row_size){
+            if($i == $row_size-1):
                 echo '</div>';
-                $i = 0;
-            }
-            $ft = false;
-        } // à fixer
+                $i = -1;
+            endif;
+            $i++;
+        } // à fixer 
     }
 }
