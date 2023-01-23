@@ -1,0 +1,27 @@
+# Disable directory browsing
+Options -Indexes
+
+# Block access to hidden files
+<Files .*>
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+# Prevent hotlinking of images
+RewriteEngine on
+RewriteCond %{HTTP_REFERER} !^$
+RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?yourdomain.com [NC]
+RewriteRule \.(jpg|jpeg|png|gif)$ - [NC,F,L]
+
+# Block access to PHP files in specific directories
+<FilesMatch "\.ph(p[2-6]?|tml)$">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>
+
+# Enable password protection for specific directories
+AuthName "Restricted Area"
+AuthType Basic
+AuthUserFile /path/to/.htpasswd
+AuthGroupFile /dev/null
+Require valid-user
