@@ -8,10 +8,11 @@
 */
 
 include "controleurs/class.ControleurUtilisateur.php";
-require_once "route/Route.php";
 
 // Crée une instance du contrôleur
-$controleur = new controleurUtilisateur();
+$controleur = new ControleurUtilisateur();
+
+require_once "route/Route.php";
 
 // $action = isset($_GET['action']) ? $_GET['action'] : 'accueil';
 

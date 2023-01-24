@@ -13,5 +13,5 @@
             <input type="submit" name="connexion_form" value="S'identifier">
         </div>
     </form>
-    <a href="?action=inscription">S'inscrire</a>
+    <a href="">S'inscrire</a>
 </div>

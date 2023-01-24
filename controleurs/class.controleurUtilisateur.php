@@ -7,7 +7,7 @@
 * @version 0
 */
 
-include "includes/class.pdoNetflixio.php";
+include "includes/class.PdoNetflixio.php";
 
 class controleurUtilisateur
 {
