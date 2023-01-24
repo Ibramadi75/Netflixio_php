@@ -19,8 +19,9 @@ class PdoNetflixio
     {
         
         try {
+
             $ini = parse_ini_file(__DIR__ . '/../app.ini');
-            
+
             $this->user = $ini['db_user'];
             $this->mdp = $ini['db_password'];
             $this->serveur = $ini['db_host'];
@@ -32,8 +33,61 @@ class PdoNetflixio
             $this->instancePdo->query("SET CHARACTER SET utf8");
         }catch (PDOException $e)
         {
+            $this->instancePdo = new PDO("mysql:host=" . $this->serveur . ';' . $this->user, $this->mdp);
+
+            $this->initDbIfNotExists();
+
             $e->getMessage();
-            echo $e;
+        }
+    }
+
+    /**
+    * Permet de réinitialiser la base de données
+    *
+    * @param bool $force Permet de forcer la réinitialisation même si la base de données existe déjà    
+    * 
+    * @return bool True en cas d'initialisation
+    *
+    * @access private
+    */
+    private function initDbIfNotExists(bool $force = false){
+        if (!$this->dbExists($this->bdd) || $force){
+            $query = file_get_contents(dirname(__DIR__) . "/bdd.sql");
+            $stmt = $this->instancePdo->prepare($query);
+            if($stmt->execute()){
+                return 1;
+            };
+        };
+        return -1; // Bdd non créée 
+    }
+
+    /**
+    * Permet de vérifier que la base de données existe
+    *
+    * @param string $dbname Nom de la base de données 
+    * 
+    * @return bool True si la base de données existe, False si elle n'existe pas 
+    *
+    * @access private
+    */
+    private function dbExists($dbname){
+        try {
+            // $query = sprintf("SELECT COUNT(*) FROM information_schema.schemata WHERE schema_name = '%s'", $dbname);
+            $query = "SHOW DATABASES LIKE '$dbname'";
+
+            $stmt = $this->instancePdo->prepare($query);
+            $stmt->execute();
+            $count = $stmt->rowCount();
+    
+            if ($count > 0) {
+                // echo "La base de données existe.";
+                return 1;
+            } else {
+                // echo "La base de données n'existe pas.";
+                return 0;
+            }
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
         }
     }
 
@@ -60,6 +114,7 @@ class PdoNetflixio
     * @return array Contient les données de l'utilisateur de la base de données dont l'id correspond
     *
     * @param int $id Identifiant de l'utilisateur dans la base de données
+    *
     * @access public
     */
     public function getUserFromDB($id)
@@ -77,6 +132,7 @@ class PdoNetflixio
     * @return array Contient les données du contenu vidéo dont l'id correspond
     *
     * @param bool $affiche Récupérer les films seulement si ils ont une affiche
+    *
     * @access public
     */
     public function getContentsFromDB(bool $affiche = FALSE)
@@ -99,6 +155,7 @@ class PdoNetflixio
     *
     * @param int $id Identifiant d'un contenu vidéo dans la base de données
     * @param bool $type Genre du contenu, "movies" = 0, "tv_shows" = 1
+    *
     * @access public
     */
     public function getContentFromDB($id, $type)
@@ -112,4 +169,21 @@ class PdoNetflixio
         return $stmt->fetch();
     }
 
+    /**
+    * Permet de récupérer l'intégralité des données d'un contenu vidéo de la base de données
+    *
+    * @return array Contient les données d'un contenu vidéo de la base de données dont l'id correspond
+    *
+    * @param string $identifiant 
+    * @param string $motDePasse 
+    *
+    * @access public
+    */
+    public function inscriptionAvocat($email, $identifiant, $motDePasse)
+    {
+        $req = sprintf("INSERT INTO users(username, password, email, subscription_type) VALUES(%s, %s, %s, 'free')", $this->instancePdo->quote($identifiant), $this->instancePdo->quote(password_hash($motDePasse, PASSWORD_DEFAULT)), $this->instancePdo->quote($email));
+        $stmt = $this->instancePdo->prepare($req);
+
+        return $stmt->execute();
+    }
 }

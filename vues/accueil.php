@@ -3,7 +3,8 @@
   require_once dirname(__DIR__) . '/includes/class.metteurEnScene.php';
   $bdd = new PdoNetflixio();
   $mesc = new MetteurEnScene();
-?>
+  require __DIR__ . '\traitement\control_traitement.php';
+  ?>
 
 <!DOCTYPE html>
 <html>
@@ -23,10 +24,14 @@
       <p style="display:inline-block" href="#" class="nav-item">Offres désormais disponibles à partir de <strong>5,99 €</strong>./mois</p> <a class="ensavoirplus" href="">En savoir plus</a>
     </div>
   </div>
+  <div style="position:relative;">
     <img id="Netflixio_Logo" src="vues\contents\Netflixio_Logo.png" alt="Logo netflixio">
+  </div>
   <div class="container mainContainer">
     <!-- https://flxt.tmsimg.com/assets/p9932851_b_h9_ab.jpg FUTURAMA -->
-    <?php require_once __DIR__ . '\composants\formulaire_connexion.php'; ?>
+    <?php
+      require __DIR__ . '\control.php';
+    ?>
   </div>
 </body>
 
@@ -58,7 +63,7 @@
   }
   #Netflixio_Logo{
     position: absolute;
-    top: 90px;
+    bottom: 5px;
     left: 20px;
     width: 140px;
   }
@@ -194,4 +199,84 @@
   .thumbnail:hover + .overlay-text, .overlay-text:hover{
     height: 30%;
   }
+</style>
+
+<style>
+    .submitCont {
+        background: #e50914;
+        border-radius: 10px;
+    }
+
+    .connexion {
+        color: white;
+        width: 300px;
+        height: fit-content;
+        margin: 0 auto;
+        padding: 1em;
+        border-radius: 10px;
+        padding: 40px;
+        text-align: center;
+        background-color: rgba(0, 0, 0, .75);
+    }
+
+    .connexion h1 {
+        margin-bottom: 1em;
+        font-size: 1.5em;
+    }
+
+    .connexion form {
+        margin-bottom: 1em;
+    }
+
+    .connexion form label {
+        position: absolute;
+        left: 20px;
+        top: 1em;
+        background-color: none;
+        color: #8c8c8c;
+    }
+
+    .parent>* {
+        transition: .1s;
+    }
+
+    .parent>input:focus+label {
+        font-size: 12px;
+        top: 2px;
+    }
+
+    .parent {
+        background: #333;
+        margin-bottom: 1em;
+    }
+
+
+    .connexion form input[type="text"],
+    .connexion form input[type="password"] {
+        font-size: 20px;
+        color: #8c8c8c;
+        background: none;
+        width: 100%;
+        padding: .5em 0;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+    .connexion form input[type="submit"] {
+        background-color: black;
+        color: white;
+        padding: 1em 1em;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        background: none;
+        font-size: 16px;
+    }
+
+    .connexion a {
+        display: inline-block;
+        margin-top: 1em;
+        color: #8c8c8c;
+        text-decoration: none;
+    }
 </style>

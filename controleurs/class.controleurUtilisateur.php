@@ -19,22 +19,30 @@ class controleurUtilisateur
     $user = $this->bdd->getUserFromDB($id);
 
     // Affiche la vue avec les informations de l'utilisateur
-    include 'vues/dashboard.php.php';
-  }
-
-  /**
-   * Page connexion
-   */
-  public function getConnexionPage(){
-    include dirname(__DIR__) . '/vues/pageConnexion.php';
+    include 'vues/dashboard.php';
   }
   
   /**
    * Page d'accueil
    */
-  public function getAccueilPage(){
-    include dirname(__DIR__) . '/vues/accueil.php';
+  public function getPageAccueil(){
+    include dirname(__DIR__) . '\vues\accueil.php';
   }
+
+  /**
+   * Page connexion
+   */
+  public function getPageConnexion(){
+    $this->getPageAccueil();
+  }
+
+  /**
+   * Page connexion
+   */
+  public function getPageInscription(){
+    include dirname(__DIR__) . '\vues\accueil.php';
+  }
+
 
   /**
    * Page profil
@@ -46,7 +54,7 @@ class controleurUtilisateur
   /**
    * Page 404
    */
-  public function getNotFoundPage($e = NULL){
+  public function getPage404($e = NULL){
     include dirname(__DIR__) . '/vues/notFoundPage.php';
   }
 }
