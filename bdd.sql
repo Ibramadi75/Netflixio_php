@@ -65,6 +65,7 @@ CREATE TABLE user_ratings (
   FOREIGN KEY (episode_id) REFERENCES episodes(id)
 );
 
+-- INSERT A DES FINS DE TESTS
 INSERT INTO subscription_types(libelle, price) VALUES('free', 0.0), ('standard', 3.99), ('premium', 4.99), ('ultra', 7.99);
 INSERT INTO users(username,password,email,subscription_type,created_at)VALUES('user1','password1','user1@example.com',2,'2022-12-31'),('user2','password2','user2@example.com', 0,'2023-01-31'),('user3','password3','user3@example.com', 1,'2022-11-30');
 INSERT INTO contents(title,release_year,number_of_seasons,duration,rating)VALUES('Titanic',2021,NULL,134,3.0),('Rebelle',2020,NULL,86,4.2),('Tenet',2019,NULL,92,2.8),('Titanic',2021,NULL,134,3.0),('Rebelle',2020,NULL,86,4.2),('Tenet',2019,NULL,92,2.8),
