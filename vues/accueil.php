@@ -30,7 +30,7 @@
   <div class="container mainContainer">
     <!-- https://flxt.tmsimg.com/assets/p9932851_b_h9_ab.jpg FUTURAMA -->
     <?php
-      require __DIR__ . '\control.php';
+      require $form;
     ?>
   </div>
 </body>

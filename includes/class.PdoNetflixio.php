@@ -179,7 +179,7 @@ class PdoNetflixio
     *
     * @access public
     */
-    public function inscriptionAvocat($email, $identifiant, $motDePasse)
+    public function inscriptionUser($email, $identifiant, $motDePasse)
     {
         $req = sprintf("INSERT INTO users(username, password, email, subscription_type) VALUES(%s, %s, %s, 'free')", $this->instancePdo->quote($identifiant), $this->instancePdo->quote(password_hash($motDePasse, PASSWORD_DEFAULT)), $this->instancePdo->quote($email));
         $stmt = $this->instancePdo->prepare($req);

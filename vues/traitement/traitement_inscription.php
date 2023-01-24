@@ -18,8 +18,8 @@ if ($_POST['motDePasseUser'] !== $_POST['confirmMotDePasseUser']) {
 if (!empty($errors)) {
     $mesc->notifEntete(implode(", ", $errors), 0);
 }else{
-    if($bdd->inscriptionAvocat($_POST['emailUser'], $_POST['identifiantUser'], $_POST['motDePasseUser'])){
+    if($bdd->inscriptionUser($_POST['emailUser'], $_POST['identifiantUser'], $_POST['motDePasseUser'])){
+        header("Location: " . dirname($url) . "/connexion");
     }else{
     }
 }
-header('Location: ?action=connexion');

@@ -13,5 +13,5 @@
             <input type="submit" name="connexion_form" value="S'identifier">
         </div>
     </form>
-    <a href="">S'inscrire</a>
+    <a href="<?= $new_url ?>/inscription">S'inscrire</a>
 </div>
