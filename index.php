@@ -7,8 +7,8 @@
 * @version 0
 */
 
-include "controleurs/class.controleurUtilisateur.php";
-require_once "attributs/class.Route.php";
+include "controleurs/class.ControleurUtilisateur.php";
+require_once "route/Route.php";
 
 // Crée une instance du contrôleur
 $controleur = new controleurUtilisateur();

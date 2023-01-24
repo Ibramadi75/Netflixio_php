@@ -1,6 +1,6 @@
 <?php
-  require_once dirname(__DIR__) . '/includes/class.pdoNetflixio.php';
-  require_once dirname(__DIR__) . '/includes/class.metteurEnScene.php';
+  require_once dirname(__DIR__) . '/includes/class.PdoNetflixio.php';
+  require_once dirname(__DIR__) . '/includes/class.MetteurEnScene.php';
   $bdd = new PdoNetflixio();
   $mesc = new MetteurEnScene();
   require __DIR__ . '\traitement\control_traitement.php';
