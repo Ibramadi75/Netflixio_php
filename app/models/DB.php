@@ -9,31 +9,28 @@
 
 class DB
 {
-    private  $serveur;
-    private  $bdd;
-    private  $user;
-    private  $mdp;
-    private  $instancePdo;
+    private $serveur;
+    private $bdd;
+    private $user;
+    private $mdp;
+    static private $pdo;
 
     public function __construct()
     {
-        
         try {
-
             $ini = parse_ini_file(dirname(__DIR__ ) . '/../app.ini');
-
             $this->user = $ini['db_user'];
             $this->mdp = $ini['db_password'];
             $this->serveur = $ini['db_host'];
             $this->bdd = $ini['db_name'];
 
             //  die("mysql:host=".$this->serveur.';' .'dbname='.$this->bdd) ; 
-            $this->instancePdo = new PDO("mysql:host=" . $this->serveur . ';' . 'dbname=' . $this->bdd, $this->user, $this->mdp);
+            $this->pdo = new PDO("mysql:host=" . $this->serveur . ';' . 'dbname=' . $this->bdd, $this->user, $this->mdp);
 
-            $this->instancePdo->query("SET CHARACTER SET utf8");
+            $this->pdo->query("SET CHARACTER SET utf8");
         }catch (PDOException $e)
         {
-            $this->instancePdo = new PDO("mysql:host=" . $this->serveur . ';' . $this->user, $this->mdp);
+            $this->pdo = new PDO("mysql:host=" . $this->serveur . ';' . $this->user, $this->mdp);
 
             $this->initDbIfNotExists();
 
@@ -53,7 +50,7 @@ class DB
     private function initDbIfNotExists(bool $force = false){
         if (!$this->dbExists($this->bdd) || $force){
             $query = file_get_contents(dirname(__DIR__) . "/bdd.sql");
-            $stmt = $this->instancePdo->prepare($query);
+            $stmt = $this->pdo->prepare($query);
             if($stmt->execute()){
                 return 1;
             };
@@ -75,7 +72,7 @@ class DB
             // $query = sprintf("SELECT COUNT(*) FROM information_schema.schemata WHERE schema_name = '%s'", $dbname);
             $query = "SHOW DATABASES LIKE '$dbname'";
 
-            $stmt = $this->instancePdo->prepare($query);
+            $stmt = $this->pdo->prepare($query);
             $stmt->execute();
             $count = $stmt->rowCount();
     
@@ -89,5 +86,15 @@ class DB
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
+    }
+
+    /**
+     * Get the value of pdo
+     */ 
+    public static function getPdo(){
+        if(self::$pdo==null){
+            self::$pdo= new DB();
+        }
+        return self::$pdo;  
     }
 }

@@ -7,8 +7,8 @@
  * @version 0
  */
 
-include dirname(__DIR__) . "/models/DB.php";
-
+require dirname(__DIR__) . "/models/DB.php";
+require dirname(__DIR__) . "/models/User.php";
 class Controleur{
   private DB $bdd;
 
@@ -33,6 +33,10 @@ class Controleur{
   {
     // Code pour afficher la vue par défaut
     require dirname(__DIR__) . "/traitement/traitement_inscription.php";
+    if(isset($errors) && empty($errors)){
+      $user = new User(NULL, $identifiantUser, $motDePasseUser, $emailUser, NULL, NULL);
+      $user->ajoute();
+    }
     return $this->prefix . 'vueInscription';
   }
 

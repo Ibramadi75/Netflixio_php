@@ -20,9 +20,9 @@ if(isset($_POST['identifiantUser']) || isset($_POST['emailUser']) || isset($_POS
     if (!empty($errors)) {
         $mesc->notifEntete(implode(", ", $errors), 0);
     }else{
-        if($bdd->inscriptionUser($_POST['emailUser'], $_POST['identifiantUser'], $_POST['motDePasseUser'])){
-            header("Location: " . dirname($url) . "/connexion");
-        }else{
-        }
+        $identifiantUser = $_POST['identifiantUser'];
+        $emailUser = $_POST['emailUser'];
+        $motDePasseUser = $_POST['motDePasseUser'];
+        $confirmMotDePasseUser = $_POST['confirmMotDePasseUser'];
     }
 endif;
