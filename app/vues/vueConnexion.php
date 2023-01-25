@@ -18,5 +18,6 @@
             </div>
         </form>
         <a href="<?= $new_url ?>/inscription">S'inscrire</a>
+        
     </div>
 </div>

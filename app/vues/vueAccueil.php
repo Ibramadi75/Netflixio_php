@@ -12,7 +12,6 @@
 <head>
   <meta charset="utf-8">
   <title>Netflix</title>
-  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -25,9 +24,9 @@
     </div>
   </div>
   <div style="position:relative;">
-    <img id="Netflixio_Logo" src="vues\contents\Netflixio_Logo.png" alt="Logo netflixio">
+    <img id="Netflixio_Logo" src="vues\assets\contents\Netflixio_Logo.png" alt="Logo netflixio">
   </div>
-  
+  <?php echo __DIR__ ?>
 
 </body>
 

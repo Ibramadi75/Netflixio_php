@@ -10,10 +10,9 @@
 // require_once __DIR__ . '/includes/class.PdoNetflixio.php';
 require_once dirname(__DIR__ ) . '/includes/class.MetteurEnScene.php';
 require_once dirname(__DIR__ ) . '/app/controleurs/Controleur.php';
-require_once dirname(__DIR__ ) . '/app/vues/traitement/control_traitement.php';
 
 // Crée une instance du contrôleur, du metteur en scène et du PDO 
-$controleur = new ControleurUtilisateur();
+$ctrl = new Controleur("app/vues/");
 $mesc = new MetteurEnScene();
 $bdd = new DB();
 ?>
