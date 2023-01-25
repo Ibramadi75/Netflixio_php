@@ -1,37 +1,161 @@
-/* Styles pour le conteneur de profil */
-.profile-container {
-  width: 80%;
-  margin: 0 auto;
-  text-align: center;
-}
+@font-face {
+  font-family: 'BebasNeue';
+  src: url('BebasNeue.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  }
 
-/* Styles pour l'en-tête du profil */
-.profile-header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
-}
+  /* Styles Globaux */
+  *{
+    font-family: "BebasNeue", sans-serif;
+  }
+  body {
+    /* font-family: Arial, sans-serif; */
+    margin: 0;
+    padding: 0;
+    background: #123347;
 
-/* Styles pour l'image de profil */
-.profile-header img {
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-}
+    min-width: 100vw;
+    min-height: 100vh;
+    /* background: linear-gradient(43deg, #cc080a 0%, #e55c5c 35%, #122b42 90%); */
+    background-image: url("https://help.nflxext.com/0af6ce3e-b27a-4722-a5f0-e32af4df3045_what_is_netflix_5_en.png");
+    background-size: cover;
+  }
+  #Netflixio_Logo{
+    position: absolute;
+    bottom: 5px;
+    left: 20px;
+    width: 140px;
+  }
 
-/* Styles pour le nom de l'utilisateur */
-.profile-header h1 {
-  font-size: 2em;
-  margin-left: 20px;
-}
+  /* Styles de la barre de navigation */
+  .topbar {
+    background-color: #fff;
+    font-size: 21px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 20px;
+    margin-bottom: 60px;
+  }
 
-/* Styles pour les détails du profil */
-.profile-details {
-  font-size: 1.2em;
-}
+  .nouveau{
+    background-color: red;
+    border-radius:30px;
+    height:fit-content;
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 5px 10px;
+    text-transform: uppercase;
+  }
 
-/* Styles pour les éléments de liste de détails */
-.profile-details p {
-  margin: 5px 0;
-}
+  .row{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    margin: 10px;
+  }
+
+  .mainContainer{
+    height: 60vh;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .ensavoirplus{
+    align-items: center;
+    display: flex;
+    font-size: 1rem;
+    font-weight: 700;
+    justify-content: center;
+    text-decoration: none;
+  }
+
+  .nav-item {
+    color: black;
+    text-decoration: none;
+    padding: 0 10px;
+  }
+
+  .carteAffiche:hover{
+    z-index:99;
+  }
+
+  /* Styles des conteneurs */
+  .container {
+    max-width: 1200px;
+    margin: auto;
+  }
+
+  /* Styles des titres */
+  .title {
+    text-align: center;
+    margin-top: 50px;
+  }
+
+  .navContainer{
+    display: flex;
+    align-items: center;
+  }
+
+  .image-container {
+    width:170px;
+    height: 220px;
+    transition: .3s;
+    transform: scale(1);
+    overflow: hidden;
+  }
+  /* Styles des vignettes */
+  .thumbnail {
+    background-color: #f5f5f5;
+    overflow: hidden;
+    width:-moz-available;
+    transition: .3s;
+  }
+  .image-container:hover{
+    transform: scale(1.1);
+    z-index: 99;
+  }
+
+  .thumbnail img {
+    /* width: inherit;
+    width: -webkit-fill-available; */
+    width: -moz-available;
+  }
+
+  .caption {
+    position: absolute;
+    padding: 20px;
+  }
+
+  .caption .title {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  .blurred-image {
+    filter: blur(3px);
+  }
+
+  .overlay-text {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.4);
+    width: 100%;
+    height:0%;
+    bottom: 0%;
+    left: 50%;
+    transform: translate(-50%, -0%);
+    color: black;
+    transition: .3s;
+    text-align: center;
+    font-weight: 700;
+  }
+
+  .overlay-text > p{
+    font-size: 20px;
+  }
+
+  .thumbnail:hover + .overlay-text, .overlay-text:hover{
+    height: 30%;
+  }

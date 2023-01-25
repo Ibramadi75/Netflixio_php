@@ -7,7 +7,7 @@
 * @version 0
 */
 
-include dirname(__DIR__) . "/modeles/DB.php";
+include dirname(__DIR__) . "/models/DB.php";
 
 class ControleurUtilisateur
 {
