@@ -14,7 +14,7 @@ CREATE TABLE users (
 CREATE TABLE subscription_types(
   id INTEGER AUTO_INCREMENT PRIMARY KEY,
   libelle VARCHAR(255) NOT NULL,
-  price VARCHAR(255) NOT NULL
+  price FLOAT NOT NULL
 );
 
 CREATE TABLE contents (
@@ -29,6 +29,8 @@ CREATE TABLE contents (
 CREATE TABLE episodes (
   id INTEGER AUTO_INCREMENT PRIMARY KEY,
   idContent INTEGER NOT NULL,
+  title VARCHAR(255) NOT NULL,
+  description VARCHAR(255) NOT NULL
   season_number INTEGER NOT NULL,
   episode_number INTEGER NOT NULL,
   duration INTEGER NOT NULL,
