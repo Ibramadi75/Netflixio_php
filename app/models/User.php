@@ -5,7 +5,7 @@
 * @author Ibrahim Madi <ibrahim75madi@gmail.com>
 * @version 0
 */
-require 'DB.php';
+require 'PdoApp.php';
 class User{
     public function __construct(
         private int|null $id,
@@ -18,8 +18,8 @@ class User{
 
     public function ajoute() {
         // code to insert the user in the database
-        $req = sprintf("INSERT INTO users(username, password, email, subscription_type,created_at) VALUES(%s, %s, %s, 'free', NOW()", DB::getPdo()->quote($this->username), DB::getPdo()->quote($this->password), DB::getPdo()::quote($this->email));
-        $stmt = DB::getPdo()::prepare($req);
+        $req = sprintf("INSERT INTO users(username, password, email, subscription_type,created_at) VALUES(%s, %s, %s, 'free', NOW()", PdoApp::getPdo()->quote($this->username), PdoApp::getPdo()->quote($this->password), PdoApp::getPdo()::quote($this->email));
+        $stmt = PdoApp::getPdo()::prepare($req);
         $stmt->execute();
     }
 

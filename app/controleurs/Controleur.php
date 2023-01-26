@@ -7,11 +7,9 @@
  * @version 0
  */
 
-require dirname(__DIR__) . "/models/DB.php";
+// require dirname(__DIR__) . "/models/DB.php";
 require dirname(__DIR__) . "/models/User.php";
 class Controleur{
-  private DB $bdd;
-
   /* Constructeur */
   public function __construct(
     private string $prefix

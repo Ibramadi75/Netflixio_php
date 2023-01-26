@@ -14,7 +14,7 @@ require_once dirname(__DIR__ ) . '/app/controleurs/Controleur.php';
 // Crée une instance du contrôleur, du metteur en scène et du PDO 
 $ctrl = new Controleur("app/vues/");
 $mesc = new MetteurEnScene();
-$bdd = new DB();
+$bdd = new PdoApp();
 ?>
 <style>
     <?php
