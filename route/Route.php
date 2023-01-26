@@ -15,17 +15,13 @@ $origine = substr($_SERVER['REQUEST_URI'], strpos($origine, "Netflixio_php") + s
 
 /*** ROUTES ***/
 $routes = match ($origine) {
-  'index.php' => $ctrl->index(),
-  '/', '/connexion' => $ctrl->connexion(),
-  '/profil' => $ctrl->profil(),
-  '/home' => $ctrl->index(),
-  '/inscription' => $ctrl->inscription(),
+  'index.php' => "index",
+  '/', '/connexion' => "connexion",
+  '/profil' => "profil",
+  '/home' => "index",
+  '/inscription' => "inscription",
   default => "app/vues/vue404", // Affiche une erreur si l'action est inconnue
 };
 
-/*** Création de l'url de destination ***/
-$destination = dirname(__DIR__) . '/' . $routes . ".php";
-
-/*** Appel du bon fichier ***/
-require $destination;
+$ctrl->$routes();
 

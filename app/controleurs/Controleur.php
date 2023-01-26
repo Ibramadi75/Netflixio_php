@@ -12,19 +12,28 @@ require dirname(__DIR__) . "/models/User.php";
 class Controleur{
   /* Constructeur */
   public function __construct(
-    private string $prefix
-  ){}
+    private string $dir,
+    private string|NULL $prefix = NULL,
+    private string|NULL $vue = NULL,
+    private string|NULL $traitement = NULL,
+  ){
+    $this->prefix = dirname($dir) . "/app/";
+    $this->vue = $this->prefix . "vues/";
+    $this->traitement = $this->prefix . "traitements/";
+  }
+
 
   public function index()
   {
     // Code pour afficher la vue par défaut
-    return $this->prefix . 'vueAccueil';
+    return $this->vue . 'vueAccueil';
   }
 
   public function connexion()
   {
     // Code pour afficher la vue par défaut
-    return $this->prefix . 'vueConnexion';
+    require_once $this->traitement . "traitement_connexion.php";
+    require_once $this->vue . "vueConnexion.php";
   }
 
   public function inscription()
@@ -35,7 +44,7 @@ class Controleur{
       $user = new User(NULL, $identifiantUser, $motDePasseUser, $emailUser, NULL, NULL);
       $user->ajoute();
     }
-    return $this->prefix . 'vueInscription';
+    return $this->vue . 'vueInscription';
   }
 
   public function content_e($id)

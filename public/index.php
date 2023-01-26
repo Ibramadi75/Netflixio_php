@@ -12,7 +12,7 @@ require_once dirname(__DIR__ ) . '/includes/class.MetteurEnScene.php';
 require_once dirname(__DIR__ ) . '/app/controleurs/Controleur.php';
 
 // Crée une instance du contrôleur, du metteur en scène et du PDO 
-$ctrl = new Controleur("app/vues/");
+$ctrl = new Controleur(__DIR__);
 $mesc = new MetteurEnScene();
 $bdd = new PdoApp();
 ?>
@@ -58,6 +58,5 @@ $bdd = new PdoApp();
             el_label.style.fontSize = "16px";
             el_label.style.top = "1em";
         }
-        
     }
 </script>
