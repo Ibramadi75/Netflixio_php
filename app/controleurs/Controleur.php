@@ -39,12 +39,13 @@ class Controleur{
   public function inscription()
   {
     // Code pour afficher la vue par défaut
-    require dirname(__DIR__) . "/traitement/traitement_inscription.php";
+    require $this->traitement . "traitement_inscription.php";
+    require $this->vue . 'vueInscription.php';
+
     if(isset($errors) && empty($errors)){
       $user = new User(NULL, $identifiantUser, $motDePasseUser, $emailUser, NULL, NULL);
       $user->ajoute();
     }
-    return $this->vue . 'vueInscription';
   }
 
   public function content_e($id)

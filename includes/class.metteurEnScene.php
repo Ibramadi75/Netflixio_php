@@ -58,8 +58,11 @@ class MetteurEnScene {
      * @param string|bool $type permet de définir le type de notification "erreur"|0 ou "succes"|1
      */
     public function notifEntete(string $message, string|bool $type = "succes"){
-        $type = $type === "succes" ?? 1;
-        $type = $type === "erreur" ?? 0;
+        if($type == "succes"){
+            $type = 1;
+        }else if($type == "erreur"){
+            $type = 0;
+        }
 
         if($type){
             echo "<div style='position:sticky;top:0;width:100%;background:black;color:white;text-align:center;padding:10px 10px;' class='notif_head'>
