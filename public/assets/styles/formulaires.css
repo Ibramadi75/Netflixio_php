@@ -203,9 +203,15 @@ body {
   top: 2px;
 }
 
+.parent > input:focus{
+  all:unset;
+  text-align: left;
+}
+
 .parent {
   background: #333;
   margin-bottom: 1em;
+  padding: 0 10px;
 }
 
 .formulaire_container form input[type="text"],
@@ -216,7 +222,7 @@ body {
   width: 100%;
   padding: 0.5em 0;
   border-radius: 5px;
-  border: 1px solid #ccc;
+  border: 0;
 }
 
 .formulaire_container form input[type="submit"] {
