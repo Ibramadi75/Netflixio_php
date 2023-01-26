@@ -6,11 +6,11 @@
         <h1>S'identifier</h1>
         <form action="" method="POST">
             <div class="parent" style="position:relative">
-                <input type="text" onclick="focused(this.id)" name="identifiantUser" id="identifiantUser">
+                <input type="text" onfocusout="unfocus(this.id)" onclick="focused(this.id)" name="identifiantUser" id="identifiantUser">
                 <label id="identifiantUser_label" for="identifiantUser">Adresse e-mail</label>
             </div>
             <div class="parent" style="position:relative">
-                <input type="password" onclick="focused(this.id)" name="motDePasseUser" id="motDePasseUser">
+                <input type="password" onfocusout="unfocus(this.id)" onclick="focused(this.id)" name="motDePasseUser" id="motDePasseUser">
                 <label id="motDePasseUser_label" for="motDePasseUser">Mot de passe</label>
             </div>
             <div class="submitCont">

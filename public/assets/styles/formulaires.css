@@ -211,13 +211,14 @@ body {
 .parent {
   background: #333;
   margin-bottom: 1em;
-  padding: 0 10px;
+  padding: 5px 10px 0 10px;
 }
+
 
 .formulaire_container form input[type="text"],
 .formulaire_container form input[type="password"] {
   font-size: 20px;
-  color: #8c8c8c;
+  color: #ffffff;
   background: none;
   width: 100%;
   padding: 0.5em 0;
