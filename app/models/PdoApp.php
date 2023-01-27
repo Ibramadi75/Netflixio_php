@@ -20,7 +20,7 @@ class PdoApp
 
         try {
 
-            $ini = parse_ini_file(__DIR__ . '/../app.ini');
+            $ini = parse_ini_file(dirname(dirname(__DIR__)) . '/app.ini');
 
             $this->user = $ini['db_user'];
             $this->mdp = $ini['db_password'];
