@@ -22,7 +22,8 @@ class App{
         }
     }
 
-    public function getRootUrl() {
+    public function getRootUrl() : string
+    {
 		return $this->root;
 	}
 
@@ -34,7 +35,8 @@ class App{
      * @access private
      * @return int Le nombre de champs dans la table spécifiée en paramètre, ou False si la table n'existe pas
      */
-    private function getCountTable(string $table) : int|bool{
+    private function getCountTable(string $table) : int|bool
+    {
         $req = sprintf("SELECT COUNT(*) FROM %s", 
             $table
         );
@@ -56,7 +58,8 @@ class App{
      * 
      * à fix : que se passe-t-il si la table n'existe pas ? Peut-être faudrait-t-il retourner -1 ?
     */
-    private function getIdApp() : int{
+    private function getIdApp() : int
+    {
         $req = sprintf("SELECT max(id) FROM config_paths;");
 
         $req = $this->pdo->getInst()->query($req);
@@ -69,7 +72,8 @@ class App{
      * @access public
      * @return bool false en cas d'échec
      */
-    public function initApp() : bool{
+    public function initApp() : bool
+    {
         // assigne l'url de la racine de l'application
         $req = sprintf("INSERT INTO config_paths(`rootPath`) VALUES(%s);", 
             $this->pdo->getInst()->quote($this->root)
