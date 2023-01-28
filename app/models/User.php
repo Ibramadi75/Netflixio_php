@@ -23,20 +23,20 @@ class User{
 
     public function ajoute() {
         // code to insert the user in the database
-        $req = sprintf("INSERT INTO users(`username`, `password`, `email`, `subscription_type`, `created_at`) VALUES(%s, %s, %s, 'free', NOW())", 
+        $req = sprintf("INSERT INTO app_users(`username`, `password`, `email`, `subscription_type`, `created_at`) VALUES(%s, %s, %s, '1', NOW())", 
             $this->pdo->getInst()->quote("$this->username"),
             $this->pdo->getInst()->quote(password_hash($this->password, PASSWORD_DEFAULT)),
             $this->pdo->getInst()->quote($this->email)
         );
 
         $stmt = $this->pdo->getInst()->prepare($req);
-        print_r($stmt);
+        // print_r($stmt);
         $stmt->execute();
     }
 
     public function supprime() {
         // code to delete the user from the database
-        $req = sprintf("DELETE FROM `users` WHERE `users`.`id` = %s", 
+        $req = sprintf("DELETE FROM `app_users` WHERE `users`.`id` = %s", 
             $this->pdo->getInst()->quote($this->id)
         );
 
@@ -46,7 +46,7 @@ class User{
 
     public function metAjour() {
         // code to update the user from the database
-        $req = sprintf("UPDATE `users` SET `username` = %s, `email` = %s; `subscription_type` = %s, `created_at` = %s WHERE `users`.`id` = %s;", 
+        $req = sprintf("UPDATE `app_users` SET `username` = %s, `email` = %s; `subscription_type` = %s, `created_at` = %s WHERE `users`.`id` = %s;", 
             $this->pdo->getInst()->quote($this->username),
             $this->pdo->getInst()->quote($this->email),
             $this->pdo->getInst()->quote($this->sub_type),
