@@ -17,10 +17,14 @@ class App{
     ){
         $this->pdo = new PdoApp();
         
-        if($this->getCountTable("config_paths")){
+        if($this->getCountTable("config_paths") == 0){
             $this->initApp();
         }
     }
+
+    public function getRootUrl() {
+		return $this->root;
+	}
 
     /**
      * Retourne le nombre de champs dans la table spécifiée en paramètre
@@ -28,9 +32,9 @@ class App{
      * @param string $table Le nom de la table
      * 
      * @access private
-     * @return string Le nombre de champs dans la table spécifiée en paramètre
+     * @return int Le nombre de champs dans la table spécifiée en paramètre, ou False si la table n'existe pas
      */
-    private function getCountTable(string $table){
+    private function getCountTable(string $table) : int|bool{
         $req = sprintf("SELECT COUNT(*) FROM %s", 
             $table
         );
@@ -38,6 +42,9 @@ class App{
         $stmt = $this->pdo->getInst()->prepare($req);
         // print_r($stmt);
         $stmt->execute();
+        $res = $stmt->fetch();
+
+        return isset($res[0]) ? $res[0] : false;
     }
 
     /**
@@ -49,10 +56,11 @@ class App{
      * 
      * à fix : que se passe-t-il si la table n'existe pas ? Peut-être faudrait-t-il retourner -1 ?
     */
-    private function getIdApp(){
+    private function getIdApp() : int{
         $req = sprintf("SELECT max(id) FROM config_paths;");
 
-        return $this->pdo->getInst()->query($req);
+        $req = $this->pdo->getInst()->query($req);
+        return $req->fetch()[0];
     }
 
     /**
@@ -61,20 +69,19 @@ class App{
      * @access public
      * @return bool false en cas d'échec
      */
-    public function initApp() {
+    public function initApp() : bool{
         // assigne l'url de la racine de l'application
         $req = sprintf("INSERT INTO config_paths(`rootPath`) VALUES(%s);", 
             $this->pdo->getInst()->quote($this->root)
         );
 
         $stmt = $this->pdo->getInst()->prepare($req);
-        print_r($stmt);
+        // print_r($stmt);
         if($stmt->execute()){
             // On récupère l'id de l'app
             $this->id = $this->getIdApp();
             return true;
         }
-
         return false;
     }
 }

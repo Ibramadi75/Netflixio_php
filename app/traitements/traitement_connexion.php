@@ -1,6 +1,4 @@
 <?php
-$url = "http://localhost/Netflixo/Netflixio_php/inscription";
-$new_url = substr($url, 0, strpos($url, "Netflixio_php") + strlen("Netflixio_php")); // affiche "http://localhost/Netflixo/"
 
 if(isset($_POST['identifiantUser']) || isset($_POST['emailUser']) || isset($_POST['motDePasseUser']) || isset($_POST['confirmMotDePasseUser'])):
     $errors = [];
