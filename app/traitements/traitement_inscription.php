@@ -29,5 +29,10 @@ if(isset($_POST['identifiantUser']) || isset($_POST['emailUser']) || isset($_POS
 
 if(isset($errors) && empty($errors)){
     $user = new User(NULL, $identifiantUser, $motDePasseUser, $emailUser, NULL, NULL);
-    $user->ajoute();
+
+    $ajout = $user->ajoute();
+    if(is_array($user->ajoute()))
+    {
+        $mesc->afficherErreurs($ajout);
+    }
 }

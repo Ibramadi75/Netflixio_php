@@ -17,7 +17,8 @@ class MetteurEnScene {
      * @param string $titre_contenue titre du contenue
      * @param string $url_affiche url de l'image faisant office d'affiche du contenue
      */
-    private function carteAfficheStandard($titre_contenu, $url_affiche){
+    private function carteAfficheStandard($titre_contenu, $url_affiche) : void
+    {
         echo '
         <a href="" class="carteAffiche">
             <div class="image-container">
@@ -36,7 +37,8 @@ class MetteurEnScene {
      * @param array $contenus contient les informations sur les contenus
      * @param int $row_size permet de définir le nombre de carte à afficher par ligne défini à 3 par défaut
      */
-    public function lesCartesAffichesStandard(array $contenus, int $row_size = 3){ 
+    public function lesCartesAffichesStandard(array $contenus, int $row_size = 3) : void
+    { 
         $i = 0;
         foreach($contenus as $contenu){
             if($i == 0):
@@ -57,7 +59,8 @@ class MetteurEnScene {
      * @param string $message contient le message à afficher dans la notification
      * @param string|bool $type permet de définir le type de notification "erreur"|0 ou "succes"|1
      */
-    public function notifEntete(string $message, string|bool $type = "succes"){
+    public function notifEntete(string $message, string|bool $type = "succes") : void
+    {
         if($type == "succes"){
             $type = 1;
         }else if($type == "erreur"){
@@ -73,5 +76,29 @@ class MetteurEnScene {
                 $message
             </div>";
         }
+    }
+
+    /**
+     * Permet de faire afficher les erreurs 
+     * 
+     * La classe CSS du conteneur de l'ensemble des erreurs est "notifs_erreurs" 
+     * 
+     * La classe de chacune des éléments "div" contenant une erreur esy "notif_erreur"
+     * 
+     * @access public
+     * @return void
+     */
+    public function afficherErreurs(array $erreurs) : void
+    {
+        echo "<div class='notifs_erreurs'>";
+        foreach($erreurs as $erreur)
+        {
+            echo "<div class='notif_erreur'>" . $erreur . "</div>";
+        }
+        echo "</div>";
+
+        echo '<script>
+        erreur_animation();
+        </script>';
     }
 }

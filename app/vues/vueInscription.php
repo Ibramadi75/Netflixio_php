@@ -1,7 +1,5 @@
 <?php
     require "composants/header.php";
-
-
 ?>
 <div class="container mainContainer">
     <div class="formulaire_container">

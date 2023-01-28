@@ -1,3 +1,15 @@
+
+<script defer>
+    function erreur_animation(){
+        
+
+        el = document.getElementsByClassName("notif_erreur");
+        console.log(el);
+        el.style.animation = "notif_erreur 5s forwards";
+        el.style.backgroundColor = "blue";
+    }
+</script>
+
 <?php
 
 /**
@@ -27,6 +39,7 @@ $pdo = new PdoApp();
         echo file_get_contents(__DIR__ . '/assets/styles/formulaires.css');
         echo file_get_contents(__DIR__ . '/assets/styles/global.css');
         echo file_get_contents(__DIR__ . '/assets/styles/pannel.css');
+        echo file_get_contents(__DIR__ . '/assets/styles/erreurs.css');
     ?>
 </style>
 
@@ -50,11 +63,11 @@ $pdo = new PdoApp();
 
 <script>
     function focused(el) {
-        // On récupère le label associé
-        el_label = document.getElementById(el + "_label");
-        el_label.style.fontSize = "12px";
-        el_label.style.top = "0px";
-    }
+    // On récupère le label associé
+    el_label = document.getElementById(el + "_label");
+    el_label.style.fontSize = "12px";
+    el_label.style.top = "0px";
+}
 
     function unfocus(el) {
         el_label = document.getElementById(el + "_label");
@@ -65,3 +78,4 @@ $pdo = new PdoApp();
         }
     }
 </script>
+

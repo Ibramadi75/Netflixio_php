@@ -21,7 +21,35 @@ class User{
         $this->pdo = new PdoApp();
     }
 
-    public function ajoute() {
+    /**
+     * Inscrit l'utilisateur à la base de données
+     * 
+     * @access public
+     * @return array|bool True en cas de succès ou tableau d'erreurs en cas d'échec
+     */
+    public function ajoute() : array|bool
+    {
+        // Liste des erreurs rencontrées
+        $erreurs = [];
+
+        // Liste des vérifications 
+        $verifications = array(
+            "L'adresse mail n'est pas valide." => filter_var($this->email, FILTER_VALIDATE_EMAIL),
+            "L'adresse mail est déjà assigné à un utilisateur." => $this->emailNonExistant($this->email),
+            "Le nom d'utilisateur est déjà assigné à un utilisateur." => $this->usernameNonExistant($this->username),
+        );
+
+        // Pour chaque vérification, si elle n'est pas validé stocker l'erreur dans la liste des erreurs rencontrées
+        foreach($verifications as $description => $condition)
+        {
+            $condition ? "" : $erreurs[] = $description;
+        }
+
+        if(!empty($erreurs))
+        {
+            return $erreurs;
+        }
+
         // code to insert the user in the database
         $req = sprintf("INSERT INTO app_users(`username`, `password`, `email`, `subscription_type`, `created_at`) VALUES(%s, %s, %s, '1', NOW())", 
             $this->pdo->getInst()->quote("$this->username"),
@@ -32,9 +60,12 @@ class User{
         $stmt = $this->pdo->getInst()->prepare($req);
         // print_r($stmt);
         $stmt->execute();
+
+        return True;
     }
 
-    public function supprime() {
+    public function supprime() : void
+    {
         // code to delete the user from the database
         $req = sprintf("DELETE FROM `app_users` WHERE `users`.`id` = %s", 
             $this->pdo->getInst()->quote($this->id)
@@ -44,7 +75,8 @@ class User{
         $stmt->execute();
     }
 
-    public function metAjour() {
+    public function metAjour() : void
+    {
         // code to update the user from the database
         $req = sprintf("UPDATE `app_users` SET `username` = %s, `email` = %s; `subscription_type` = %s, `created_at` = %s WHERE `users`.`id` = %s;", 
             $this->pdo->getInst()->quote($this->username),
@@ -53,5 +85,48 @@ class User{
             $this->pdo->getInst()->quote($this->created_at),
             $this->pdo->getInst()->quote($this->id)
         );
+
+        $stmt = $this->pdo->getInst()->prepare($req);
+        $stmt->execute();
+    }
+
+    /**
+     * Vérifie qu'une adresse mail n'existe pas déjà dans la table des utilisateurs
+     * 
+     * @param string $email
+     * 
+     * @access private
+     * @return bool True si l'adresse mail n'existe pas déjà ou False si elle existe déjà
+     */
+    private function emailNonExistant(string $email) : bool
+    {
+        $req = sprintf("SELECT COUNT(*) FROM `app_users` WHERE `email` = %s", 
+            $this->pdo->getInst()->quote($email)
+        );
+
+        $stmt = $this->pdo->getInst()->prepare($req);
+        $stmt->execute();
+
+        return $stmt->fetch()[0] == 0 ? True : False;
+    }
+
+    /**
+     * Vérifie qu'un nom d'utilisateur n'existe pas déjà dans la table des utilisateurs
+     * 
+     * @param string $username
+     * 
+     * @access private
+     * @return bool True si le nom d'utilisateur n'existe pas déjà ou False si elle existe déjà
+     */
+    private function usernameNonExistant(string $username) : bool
+    {
+        $req = sprintf("SELECT COUNT(*) FROM `app_users` WHERE `username` = %s", 
+            $this->pdo->getInst()->quote($username)
+        );
+
+        $stmt = $this->pdo->getInst()->prepare($req);
+        $stmt->execute();
+
+        return $stmt->fetch()[0] == 0 ? True : False;
     }
 }
