@@ -27,6 +27,6 @@
                 <input type="submit" name="inscription_form" value="S'identifier">
             </div>
         </form>
-        <a href="<?= $new_url ?>/connexion">Se connecter</a>
+        <a href="<?= $rootUrl ?>/connexion">Se connecter</a>
     </div>
 </div>
