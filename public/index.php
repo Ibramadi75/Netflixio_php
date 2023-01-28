@@ -11,11 +11,13 @@
 require_once dirname(__DIR__ ) . '/includes/class.MetteurEnScene.php';
 require_once dirname(__DIR__ ) . '/app/controleurs/Controleur.php';
 require_once dirname(__DIR__ ) . '/app/models/PdoApp.php';
+require_once dirname(__DIR__ ) . '/app/models/App.php';
 
 // Crée une instance du contrôleur, du metteur en scène et du PDO 
 $ctrl = new Controleur(__DIR__);
 $mesc = new MetteurEnScene();
 $bdd = new PdoApp();
+$app = new App("http://localhost:8888");
 ?>
 <style>
     <?php

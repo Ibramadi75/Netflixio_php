@@ -9,11 +9,17 @@
 
 class PdoApp
 {
-    private  $serveur;
-    private  $bdd;
-    private  $user;
-    private  $mdp;
-    private  $instancePdo;
+    private $serveur;
+    private $bdd;
+    private $user;
+    private $mdp;
+    private $instancePdo;
+
+    /* Getters */
+    public function getInst(){
+        return $this->instancePdo;
+    }
+
 
     public function __construct()
     {
@@ -33,8 +39,7 @@ class PdoApp
             $this->instancePdo->query("SET CHARACTER SET utf8");
         }catch (PDOException $e)
         {
-            $this->instancePdo = new PDO("mysql:host=" . $this->serveur . ';' . $this->user, $this->mdp);
-
+            $this->instancePdo = new PDO("mysql:host=" . $this->serveur, $this->user, $this->mdp);
             $this->initDbIfNotExists();
 
             $e->getMessage();
@@ -52,7 +57,7 @@ class PdoApp
     */
     private function initDbIfNotExists(bool $force = false){
         if (!$this->dbExists($this->bdd) || $force){
-            $query = file_get_contents(dirname(__DIR__) . "/bdd.sql");
+            $query = file_get_contents(dirname(__DIR__) . "/assets/bdd.sql");
             $stmt = $this->instancePdo->prepare($query);
             if($stmt->execute()){
                 return 1;

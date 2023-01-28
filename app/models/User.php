@@ -8,6 +8,8 @@
 
 require_once 'PdoApp.php';
 class User{
+    private PdoApp $pdo;
+
     public function __construct(
         private int|null $id,
         private string $username,
@@ -15,8 +17,8 @@ class User{
         private string $email,
         private int|null $sub_type,
         private string|null $created_at,
-        private $pdo = new PdoApp()
     ){
+        $this->pdo = new PdoApp();
     }
 
     public function ajoute() {
@@ -28,6 +30,7 @@ class User{
         );
 
         $stmt = $this->pdo->getInst()->prepare($req);
+        print_r($stmt);
         $stmt->execute();
     }
 
