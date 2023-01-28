@@ -22,7 +22,15 @@ class App{
         }
     }
 
-    public function getCountTable(string $table){
+    /**
+     * Retourne le nombre de champs dans la table spécifiée en paramètre
+     * 
+     * @param string $table Le nom de la table
+     * 
+     * @access private
+     * @return string Le nombre de champs dans la table spécifiée en paramètre
+     */
+    private function getCountTable(string $table){
         $req = sprintf("SELECT COUNT(*) FROM %s", 
             $table
         );
@@ -32,12 +40,27 @@ class App{
         $stmt->execute();
     }
 
-    public function getIdApp(){
+    /**
+     * Récupère l'id de la configuration la plus récente
+     * => Permet de définir la dernière configuration créer comme la configuration active
+     * 
+     * @access private
+     * @return int id de la configuration la plus récente
+     * 
+     * à fix : que se passe-t-il si la table n'existe pas ? Peut-être faudrait-t-il retourner -1 ?
+    */
+    private function getIdApp(){
         $req = sprintf("SELECT max(id) FROM config_paths;");
 
         return $this->pdo->getInst()->query($req);
     }
 
+    /**
+     * Initialise l'application lors de son premier lancement
+     * 
+     * @access public
+     * @return bool false en cas d'échec
+     */
     public function initApp() {
         // assigne l'url de la racine de l'application
         $req = sprintf("INSERT INTO config_paths(`rootPath`) VALUES(%s);", 
@@ -46,9 +69,12 @@ class App{
 
         $stmt = $this->pdo->getInst()->prepare($req);
         print_r($stmt);
-        $stmt->execute();
+        if($stmt->execute()){
+            // On récupère l'id de l'app
+            $this->id = $this->getIdApp();
+            return true;
+        }
 
-        // On récupère l'id de l'app
-        $this->id = $this->getIdApp();
+        return false;
     }
 }
