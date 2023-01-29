@@ -75,6 +75,27 @@ class User{
         $stmt->execute();
     }
 
+    public function connexion() : void
+    {
+        // code to connect user
+        // L'utilisateur peut choisir de se connecter avec son adresse mail ou son nom d'utilisateur
+        $identifiant = empty($this->username) ? $this->email : $this->username;
+
+        $req = sprintf("SELECT id, username, email, password, subscription_type, created_at FROM `app_users` WHERE email = %s OR username = %s", 
+            $this->pdo->getInst()->quote($identifiant), $this->pdo->getInst()->quote($identifiant)
+        );
+        $stmt = $this->pdo->getInst()->prepare($req);
+        $stmt->execute();
+
+        $res = $stmt->fetch();
+
+
+        if(password_verify($this->password, $res["password"]))
+        {
+            $_SESSION["user_id"] = $res["id"];
+        }
+    }
+
     public function metAjour() : void
     {
         // code to update the user from the database

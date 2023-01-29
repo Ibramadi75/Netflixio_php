@@ -26,6 +26,9 @@
  * @version 0
  */
 
+// Démarrage de la session
+session_start();
+
 // require_once __DIR__ . '/includes/class.PdoNetflixio.php';
 require_once dirname(__DIR__) . '/includes/class.MetteurEnScene.php';
 require_once dirname(__DIR__) . '/app/controleurs/Controleur.php';

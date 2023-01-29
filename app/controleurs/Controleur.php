@@ -31,10 +31,12 @@ class Controleur{
   }
 
   /* Méthodes */
-  public function index() : string
+  public function index() : array
   {
     // Code pour afficher la vue par défaut
-    return $this->vue . "vueAccueil";
+    return array(
+      $this->vue . "vueAccueil"
+    );
   }
 
   public function connexion() : array
@@ -64,6 +66,12 @@ class Controleur{
 
   public function vue404(){
     require $this->vue . 'vue404.php';
+  }
+
+  public function profil() : array{
+    return array(
+      $this->vue . 'vueProfil.php'
+    );
   }
 
   public function content_e($id)

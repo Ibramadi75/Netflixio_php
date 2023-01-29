@@ -1,5 +1,8 @@
 <?php
+// Si l'utilisateur est connecté on ne lui affiche pas la page de connexion
+if(!isset($_SESSION["user_id"])):
     require "composants/header.php";
+
 ?>
 <div class="container mainContainer">
     <div class="formulaire_container">
@@ -20,3 +23,6 @@
         <a href="<?= $rootUrl ?>/inscription">S'inscrire</a>
     </div>
 </div>
+<?php
+endif;
+?>
