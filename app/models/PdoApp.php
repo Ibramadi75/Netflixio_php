@@ -17,9 +17,7 @@ class PdoApp
 
     public function __construct()
     {
-
         try {
-
             $ini = parse_ini_file(dirname(dirname(__DIR__)) . '/app.ini');
 
             $this->user = $ini['db_user'];
@@ -52,7 +50,7 @@ class PdoApp
     */
     private function initDbIfNotExists(bool $force = false){
         if (!$this->dbExists($this->bdd) || $force){
-            $query = file_get_contents(dirname(__DIR__) . "/bdd.sql");
+            $query = file_get_contents(dirname(dirname(__DIR__)) . "/bdd.sql");
             $stmt = $this->instancePdo->prepare($query);
             if($stmt->execute()){
                 return 1;

@@ -1,7 +1,5 @@
 <?php
     require "composants/header.php";
-
-
 ?>
 <div class="container mainContainer">
     <div class="formulaire_container">
@@ -27,6 +25,7 @@
                 <input type="submit" name="inscription_form" value="S'identifier">
             </div>
         </form>
-        <a href="<?= $new_url ?>/connexion">Se connecter</a>
+        <a href="<?= $_SERVER['REQUEST_URI'] ?>connexion">S'inscrire</a>
+
     </div>
 </div>

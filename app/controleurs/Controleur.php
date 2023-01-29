@@ -48,6 +48,10 @@ class Controleur{
     }
   }
 
+  public function vue404(){
+    require $this->vue . 'vue404.php';
+  }
+
   public function content_e($id)
   {
     // Code pour afficher les détails d'un élément en particulier

@@ -20,8 +20,7 @@ $routes = match ($origine) {
   '/profil' => "profil",
   '/home' => "index",
   '/inscription' => "inscription",
-  default => "app/vues/vue404", // Affiche une erreur si l'action est inconnue
+  default => "vue404", // Affiche une erreur si l'action est inconnue
 };
-
 $ctrl->$routes();
 

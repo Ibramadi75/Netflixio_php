@@ -30,7 +30,7 @@ CREATE TABLE episodes (
   id INTEGER AUTO_INCREMENT PRIMARY KEY,
   idContent INTEGER NOT NULL,
   title VARCHAR(255) NOT NULL,
-  description VARCHAR(255) NOT NULL
+  description VARCHAR(255) NOT NULL,
   season_number INTEGER NOT NULL,
   episode_number INTEGER NOT NULL,
   duration INTEGER NOT NULL,
@@ -65,6 +65,11 @@ CREATE TABLE user_ratings (
   FOREIGN KEY (user_id) REFERENCES users(id),
   FOREIGN KEY (idContent) REFERENCES contents(id),
   FOREIGN KEY (episode_id) REFERENCES episodes(id)
+);
+
+CREATE TABLE app_config(
+  id INTEGER PRIMARY KEY,
+  rootPath VARCHAR(255) NOT NULL
 );
 
 -- INSERT A DES FINS DE TESTS

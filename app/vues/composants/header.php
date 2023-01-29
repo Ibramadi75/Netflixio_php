@@ -17,5 +17,7 @@
     </div>
   </div>
   <div style="position:relative;">
-    <img id="Netflixio_Logo" src="public/assets/contents/Netflixio_Logo.png" alt="Logo netflixio">
+    <a href="">
+      <img id="Netflixio_Logo" src="public/assets/contents/Netflixio_Logo.png" alt="Logo netflixio">
+    </a>
   </div>
