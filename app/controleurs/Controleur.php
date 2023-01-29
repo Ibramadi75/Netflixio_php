@@ -10,6 +10,7 @@
 // require dirname(__DIR__) . "/models/DB.php";
 require dirname(__DIR__) . "/models/User.php";
 class Controleur{
+  private App $app;
   /* Constructeur */
   public function __construct(
     private string $dir,
@@ -20,32 +21,45 @@ class Controleur{
     $this->prefix = dirname($dir) . "/app/";
     $this->vue = $this->prefix . "vues/";
     $this->traitement = $this->prefix . "traitements/";
+    $this->app = new App("http://localhost:8888/Netflixio_php");
   }
 
-
-  public function index()
+  /* Getters et Setters */
+  public function getApp() : App
   {
-    // Code pour afficher la vue par défaut
-    return $this->vue . 'vueAccueil';
+    return $this->app;
   }
 
-  public function connexion()
+  /* Méthodes */
+  public function index() : string
   {
     // Code pour afficher la vue par défaut
-    require_once $this->traitement . "traitement_connexion.php";
-    require_once $this->vue . "vueConnexion.php";
+    return $this->vue . "vueAccueil";
   }
 
-  public function inscription()
+  public function connexion() : array
   {
     // Code pour afficher la vue par défaut
-    require $this->traitement . "traitement_inscription.php";
-    require $this->vue . 'vueInscription.php';
+    return array(
+      $this->traitement . "traitement_connexion.php",
+      $this->vue . "vueConnexion.php"
+    );
+  }
 
-    if(isset($errors) && empty($errors)){
-      $user = new User(NULL, $identifiantUser, $motDePasseUser, $emailUser, NULL, NULL);
-      $user->ajoute();
-    }
+  public function inscription() : array
+  {
+    // Code pour afficher la vue par défaut
+    return array(
+      $this->traitement . "traitement_inscription.php",
+      $this->vue . "vueInscription.php"
+    );
+  }
+
+  public function erreur() : array
+  {
+    return array(
+      $this->vue . "vueErreur.php",
+    );
   }
 
   public function vue404(){

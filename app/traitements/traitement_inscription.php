@@ -1,6 +1,6 @@
 <?php
-
-if(isset($_POST['identifiantUser']) || isset($_POST['emailUser']) || isset($_POST['motDePasseUser']) || isset($_POST['confirmMotDePasseUser'])):
+if(isset($_POST['identifiantUser']) || isset($_POST['emailUser']) || isset($_POST['motDePasseUser']) || isset($_POST['confirmMotDePasseUser']))
+{
     $errors = [];
     if (!isset($_POST['identifiantUser'])) {
         $errors[] = "L'identifiant n'est pas défini";
@@ -25,4 +25,14 @@ if(isset($_POST['identifiantUser']) || isset($_POST['emailUser']) || isset($_POS
         $motDePasseUser = $_POST['motDePasseUser'];
         $confirmMotDePasseUser = $_POST['confirmMotDePasseUser'];
     }
-endif;
+}
+
+if(isset($errors) && empty($errors)){
+    $user = new User(NULL, $identifiantUser, $motDePasseUser, $emailUser, NULL, NULL);
+
+    $ajout = $user->ajoute();
+    if(is_array($user->ajoute()))
+    {
+        $mesc->afficherErreurs($ajout);
+    }
+}

@@ -1,7 +1,7 @@
 <?php
   require_once dirname(__DIR__) . '/includes/class.PdoNetflixio.php';
   require_once dirname(__DIR__) . '/includes/class.MetteurEnScene.php';
-  $bdd = new PdoNetflixio();
+  $bdd = new PdoApp();
   $mesc = new MetteurEnScene();
   require __DIR__ . '\traitement\control_traitement.php';
   ?>
@@ -26,8 +26,6 @@
   <div style="position:relative;">
     <img id="Netflixio_Logo" src="vues\assets\contents\Netflixio_Logo.png" alt="Logo netflixio">
   </div>
-  <?php echo __DIR__ ?>
-
 </body>
 
 </html>

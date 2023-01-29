@@ -1,3 +1,15 @@
+
+<script defer>
+    function erreur_animation(){
+        
+
+        el = document.getElementsByClassName("notif_erreur");
+        console.log(el);
+        el.style.animation = "notif_erreur 5s forwards";
+        el.style.backgroundColor = "blue";
+    }
+</script>
+
 <?php
 
 /**
@@ -11,11 +23,15 @@
 require_once dirname(__DIR__ ) . '/includes/class.MetteurEnScene.php';
 require_once dirname(__DIR__ ) . '/app/controleurs/Controleur.php';
 require_once dirname(__DIR__ ) . '/app/models/PdoApp.php';
+require_once dirname(__DIR__ ) . '/app/models/App.php';
+require_once dirname(__DIR__ ) . '/app/models/Erreur.php';
 
 // Crée une instance du contrôleur, du metteur en scène et du PDO 
 $ctrl = new Controleur(__DIR__);
 $mesc = new MetteurEnScene();
-$bdd = new PdoApp();
+$pdo = new PdoApp();
+
+
 ?>
 <style>
     <?php
@@ -23,6 +39,7 @@ $bdd = new PdoApp();
         echo file_get_contents(__DIR__ . '/assets/styles/formulaires.css');
         echo file_get_contents(__DIR__ . '/assets/styles/global.css');
         echo file_get_contents(__DIR__ . '/assets/styles/pannel.css');
+        echo file_get_contents(__DIR__ . '/assets/styles/erreurs.css');
     ?>
 </style>
 
@@ -46,11 +63,11 @@ $bdd = new PdoApp();
 
 <script>
     function focused(el) {
-        // On récupère le label associé
-        el_label = document.getElementById(el + "_label");
-        el_label.style.fontSize = "12px";
-        el_label.style.top = "0px";
-    }
+    // On récupère le label associé
+    el_label = document.getElementById(el + "_label");
+    el_label.style.fontSize = "12px";
+    el_label.style.top = "0px";
+}
 
     function unfocus(el) {
         el_label = document.getElementById(el + "_label");
@@ -61,3 +78,4 @@ $bdd = new PdoApp();
         }
     }
 </script>
+

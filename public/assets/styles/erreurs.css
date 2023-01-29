@@ -1,0 +1,39 @@
+
+.body{
+
+}
+
+.notifs_erreurs
+{
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    /* background-color: whitesmoke; */
+}
+
+.notif_erreur
+{
+    padding: 10px;
+    margin: 10px;
+    background-color: whitesmoke;
+    color: red;
+}
+
+@keyframes notif_erreur {
+    0%{
+        opacity: 0;
+        margin-right: -50px;
+    }
+    10%{
+        opacity: 1;
+        margin-right: 10px;
+    }
+    90%{
+        opacity: 1;
+        margin-right: 10px;
+    }
+    100%{
+        opacity: 0;
+        margin-right: -50px;
+    }
+}

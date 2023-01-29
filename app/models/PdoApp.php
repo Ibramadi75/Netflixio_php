@@ -9,11 +9,17 @@
 
 class PdoApp
 {
-    private  $serveur;
-    private  $bdd;
-    private  $user;
-    private  $mdp;
-    private  $instancePdo;
+    private $serveur;
+    private $bdd;
+    private $user;
+    private $mdp;
+    private $instancePdo;
+
+    /* Getters */
+    public function getInst(){
+        return $this->instancePdo;
+    }
+
 
     public function __construct()
     {
@@ -31,8 +37,7 @@ class PdoApp
             $this->instancePdo->query("SET CHARACTER SET utf8");
         }catch (PDOException $e)
         {
-            $this->instancePdo = new PDO("mysql:host=" . $this->serveur . ';' . $this->user, $this->mdp);
-
+            $this->instancePdo = new PDO("mysql:host=" . $this->serveur, $this->user, $this->mdp);
             $this->initDbIfNotExists();
 
             $e->getMessage();
@@ -50,7 +55,7 @@ class PdoApp
     */
     private function initDbIfNotExists(bool $force = false){
         if (!$this->dbExists($this->bdd) || $force){
-            $query = file_get_contents(dirname(dirname(__DIR__)) . "/bdd.sql");
+            $query = file_get_contents(dirname(__DIR__) . "/assets/bdd.sql");
             $stmt = $this->instancePdo->prepare($query);
             if($stmt->execute()){
                 return 1;
@@ -127,13 +132,12 @@ class PdoApp
     /**
     * Permet de récupérer l'intégralité des données d'un contenu vidéo de la base de données
     *
-    * @return array Contient les données du contenu vidéo dont l'id correspond
-    *
-    * @param bool $affiche Récupérer les films seulement si ils ont une affiche
+    * @param bool $affiche True : Récupérer les films seulement si ils ont une affiche, False : Récupérer tous les films
     *
     * @access public
+    * @return array Contient les données du contenu vidéo dont l'id correspond
     */
-    public function getContentsFromDB(bool $affiche = FALSE)
+    public function getContentsFromDB(bool $affiche = FALSE) : array
     {
         $jointure = $affiche ? "LEFT JOIN" : "INNER JOIN";
         // on récupère les films et leurs affiches
@@ -149,14 +153,13 @@ class PdoApp
     /**
     * Permet de récupérer l'intégralité des données d'un contenu vidéo de la base de données
     *
-    * @return array Contient les données d'un contenu vidéo de la base de données dont l'id correspond
-    *
     * @param int $id Identifiant d'un contenu vidéo dans la base de données
     * @param bool $type Genre du contenu, "movies" = 0, "tv_shows" = 1
     *
     * @access public
+    * @return array Contient les données d'un contenu de la table "app_contents" dont l'id correspond
     */
-    public function getContentFromDB($id, $type)
+    public function getContentFromDB($id, $type) : array
     {
         $type = $type ? "tv_shows" : "movies";
 
@@ -170,12 +173,11 @@ class PdoApp
     /**
     * Permet de récupérer l'intégralité des données d'un contenu vidéo de la base de données
     *
-    * @return array Contient les données d'un contenu vidéo de la base de données dont l'id correspond
-    *
-    * @param string $identifiant 
-    * @param string $motDePasse 
+    * @param string $identifiant identifiant entré par l'utilisateur
+    * @param string $motDePasse mot de passe entré par l'utilisateur
     *
     * @access public
+    * @return bool — TRUE en cas de succès ou FALSE en cas d'échec.
     */
     public function inscriptionUser($email, $identifiant, $motDePasse)
     {
