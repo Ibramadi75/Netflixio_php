@@ -1,6 +1,5 @@
 <?php
 
-
 class Erreur {
     private string $description;
     private string $urlBackground;

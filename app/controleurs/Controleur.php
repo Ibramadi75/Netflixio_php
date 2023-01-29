@@ -21,7 +21,7 @@ class Controleur{
     $this->prefix = dirname($dir) . "/app/";
     $this->vue = $this->prefix . "vues/";
     $this->traitement = $this->prefix . "traitements/";
-    $this->app = new App("http://localhost:8888/Netflixio_php");
+    $this->app = new App("http://localhost/Netflixio/Netflixio_php", new PdoApp);
   }
 
   /* Getters et Setters */

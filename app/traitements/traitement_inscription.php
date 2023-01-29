@@ -31,7 +31,7 @@ if(isset($errors) && empty($errors)){
     $user = new User(NULL, $identifiantUser, $motDePasseUser, $emailUser, NULL, NULL);
 
     $ajout = $user->ajoute();
-    if(is_array($user->ajoute()))
+    if(is_array($ajout))
     {
         $mesc->afficherErreurs($ajout);
     }

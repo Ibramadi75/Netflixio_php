@@ -9,14 +9,12 @@
 require_once 'PdoApp.php';
 
 class App{
-    private PdoApp $pdo;
     private int|null $id;
 
     public function __construct(
-        private string $root
+        private string $root,
+        private PdoApp $pdo
     ){
-        $this->pdo = new PdoApp();
-        
         if($this->getCountTable("config_paths") == 0){
             $this->initApp();
         }

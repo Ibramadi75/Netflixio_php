@@ -31,14 +31,20 @@ class PdoApp
             $this->serveur = $ini['db_host'];
             $this->bdd = $ini['db_name'];
 
-            //  die("mysql:host=".$this->serveur.';' .'dbname='.$this->bdd) ; 
+            // On se connecter à la base si elle existe 
             $this->instancePdo = new PDO("mysql:host=" . $this->serveur . ';' . 'dbname=' . $this->bdd, $this->user, $this->mdp);
 
             $this->instancePdo->query("SET CHARACTER SET utf8");
         }catch (PDOException $e)
         {
-            $this->instancePdo = new PDO("mysql:host=" . $this->serveur, $this->user, $this->mdp);
+            // On se connecte au serveur
+            $this->instancePdo = new PDO("mysql:host=" . $this->serveur . ';' . $this->user, $this->mdp);
+
+            // On créer la base de données car elle n'existe pas
             $this->initDbIfNotExists();
+
+            // On se connecter à la base de données
+            $this->instancePdo = new PDO("mysql:host=" . $this->serveur . ';' . 'dbname=' . $this->bdd, $this->user, $this->mdp);
 
             $e->getMessage();
         }

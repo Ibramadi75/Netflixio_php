@@ -1,4 +1,4 @@
-DROP DATABASE IF EXISTS `netflixio`;
+trDROP DATABASE IF EXISTS `netflixio`;
 CREATE DATABASE IF NOT EXISTS `netflixio`;
 USE `netflixio`;
 
