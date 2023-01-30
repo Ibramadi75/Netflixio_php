@@ -75,9 +75,13 @@ class User{
         $stmt->execute();
     }
 
-    public function connexion() : void
+    public function connexion() : array|bool
     {
         // code to connect user
+
+        // Liste des erreurs rencontrées
+        $erreurs = [];
+
         // L'utilisateur peut choisir de se connecter avec son adresse mail ou son nom d'utilisateur
         $identifiant = empty($this->username) ? $this->email : $this->username;
 
@@ -89,11 +93,26 @@ class User{
 
         $res = $stmt->fetch();
 
+        // Liste des vérifications locals
+        $verifications = array(
+            "L'adresse mail n'est pas valide." => filter_var($this->email, FILTER_VALIDATE_EMAIL),
+            "L'identifiant n'est pas valide." => $res === false,
+            "Le mot de passe est incorrect." => password_verify($this->password, $res["password"])
+        );
 
-        if(password_verify($this->password, $res["password"]))
+        // Pour chaque vérification, si elle n'est pas validé stocker l'erreur dans la liste des erreurs rencontrées
+        foreach($verifications as $description => $condition)
         {
-            $_SESSION["user_id"] = $res["id"];
+            $condition ? "" : $erreurs[] = $description;
         }
+
+        if(!empty($erreurs))
+        {
+            return $erreurs;
+        }
+
+        $_SESSION["user_id"] = $res["id"];
+        return 1;
     }
 
     public function metAjour() : void

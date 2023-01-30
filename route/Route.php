@@ -18,13 +18,21 @@ $routes = match ($origine) {
   "/profil" => "profil",
   "/home" => "index",
   "/inscription" => "inscription",
+  "/deconnexion" => "deconnexion",
   default => "erreur404", // Affiche une erreur 404 si l"action est inconnue
 };
+
+// Déconnexion de l'utilisateur 
+if($routes === "deconnexion")
+{
+  unset($_SESSION["user_id"]);
+    $routes = "connexion";
+}
 
 // Si l'utilisateur est connecté il ne peut pas accéder aux pages inscription et connexion
 if(isset($_SESSION["user_id"]))
 {
-  $routes = match ($origine) { "/connexion", "/inscription" => "profil" };
+  $routes = match ($origine) { default => "profil" };
 }
 
 /* ici l'objectif est de pouvoir à l'avenir créer mes propres codes d'erreurs qui pourront être définit dans la base de données en m'évitant de devoir créer une page pour chacune d'entre elles*/

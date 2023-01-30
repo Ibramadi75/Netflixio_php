@@ -20,5 +20,10 @@ endif;
 // Si il n'y aucune erreur et que l'utilisateur n'est pas connecté, on tente de le connecter
 if(isset($errors) && empty($errors) && !isset($_SESSION["user_id"]) ){
     $user = new User(NULL, $identifiantUser, $motDePasseUser, $identifiantUser, NULL, NULL);
-    $user->connexion();
+    $connexion = $user->connexion();
+
+    if(is_array($connexion))
+    {
+        $mesc->afficherErreurs($connexion);
+    }
 }
