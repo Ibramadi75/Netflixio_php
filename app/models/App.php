@@ -12,27 +12,29 @@ class App{
     private int|null $id;
 
     public function __construct(
-        private string $root,
-        private PdoApp $pdo
+        private string $root, // Root URL of the app 
+        private PdoApp $pdo // PDO instance of the app 
     ){
+        // If there are no fields in the config_paths table, initialize the app 
         if($this->getCountTable("config_paths") == 0){
             $this->initApp();
         }
     }
 
+    // Getter the root URL of the app 
     public function getRootUrl() : string
     {
 		return $this->root;
 	}
 
     /**
-     * Retourne le nombre de champs dans la table spécifiée en paramètre
-     * 
-     * @param string $table Le nom de la table
-     * 
-     * @access private
-     * @return int Le nombre de champs dans la table spécifiée en paramètre, ou False si la table n'existe pas
-     */
+    * Retrieve the number of fields in a specified table
+    *
+    * @param string $table The name of the table
+    *   
+    * @access private
+    * @return int The number of fields in a specified table, or False if the table does not exist 
+    */
     private function getCountTable(string $table) : int|bool
     {
         $req = sprintf("SELECT COUNT(*) FROM %s", 
@@ -40,7 +42,6 @@ class App{
         );
 
         $stmt = $this->pdo->getInst()->prepare($req);
-        // print_r($stmt);
         $stmt->execute();
         $res = $stmt->fetch();
 
@@ -48,13 +49,12 @@ class App{
     }
 
     /**
-     * Récupère l'id de la configuration la plus récente
-     * => Permet de définir la dernière configuration créer comme la configuration active
-     * 
-     * @access private
-     * @return int id de la configuration la plus récente
-     * 
-     * à fix : que se passe-t-il si la table n'existe pas ? Peut-être faudrait-t-il retourner -1 ?
+    * Retrieve id of most recent configuration
+    * => Set last created configuration as active configuration
+    *
+    * @access private
+    * @return int id of most recent configuration
+    * à fix : que se passe-t-il si la table n'existe pas ? Peut-être faudrait-t-il retourner -1 ?
     */
     private function getIdApp() : int
     {
@@ -65,22 +65,22 @@ class App{
     }
 
     /**
-     * Initialise l'application lors de son premier lancement
+     * Initialize the application on its first launch
      * 
      * @access public
-     * @return bool false en cas d'échec
+     * @return bool false if failed
      */
     public function initApp() : bool
     {
-        // assigne l'url de la racine de l'application
+        // Assign the URL of the application root
         $req = sprintf("INSERT INTO config_paths(`rootPath`) VALUES(%s);", 
             $this->pdo->getInst()->quote($this->root)
         );
-
+    
         $stmt = $this->pdo->getInst()->prepare($req);
         // print_r($stmt);
         if($stmt->execute()){
-            // On récupère l'id de l'app
+            // Retrieve the app id 
             $this->id = $this->getIdApp();
             return true;
         }

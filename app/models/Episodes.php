@@ -11,15 +11,15 @@ class Episodes{
         private float $rating
     ){}
 
-    public function ajoute() {
+    public function add() {
         // code to insert the user in the database
     }
 
-    public function supprime() {
+    public function delete() {
         // code to delete the user from the database
     }
 
-    public function metAjour() {
+    public function update() {
         // code to update the user from the database
     }
 }

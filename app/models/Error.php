@@ -1,6 +1,6 @@
 <?php
 
-class Erreur {
+class FrontError {
     private string $description;
     private string $urlBackground;
 
@@ -8,7 +8,7 @@ class Erreur {
         private int $code,
         private PdoApp $pdo
     ){
-        $err = $this->getErreurInfos($this->code);
+        $err = $this->getErrorInfos($this->code);
 
         $this->description = $err["description"];
         $this->urlBackground = $err["urlBackground"];
@@ -27,9 +27,9 @@ class Erreur {
         return $this->code;
     }
 
-    /* Méthodes */
-    private function getErreurInfos(int $code) : array {
-        // Récupère les infos de l'erreur
+    /* Methods */
+    private function getErrorInfos(int $code) : array {
+        // Get error informations
         $req = sprintf("SELECT description, urlBackground FROM config_erreurs", 
             $this->pdo->getInst()->quote($code)
         );

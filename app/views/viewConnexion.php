@@ -1,7 +1,7 @@
 <?php
 // Si l'utilisateur est connecté on ne lui affiche pas la page de connexion
 if(!isset($_SESSION["user_id"])):
-    require "composants/modHeader.php";
+    require_once "composants/modHeader.php";
 
 ?>
 <div class="container mainContainer">

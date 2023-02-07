@@ -1,6 +1,6 @@
 <?php
 /**
-* Modele User
+* User model
 *
 * @author Ibrahim Madi <ibrahim75madi@gmail.com>
 * @version 0
@@ -27,16 +27,16 @@ class User{
      * @access public
      * @return array|bool True en cas de succès ou tableau d'erreurs en cas d'échec
      */
-    public function ajoute() : array|bool
+    public function add() : array|bool
     {
         // Liste des erreurs rencontrées
-        $erreurs = [];
+        $errors = [];
 
         // Liste des vérifications 
         $verifications = array(
             "L'adresse mail n'est pas valide." => filter_var($this->email, FILTER_VALIDATE_EMAIL),
-            "L'adresse mail est déjà assigné à un utilisateur." => $this->emailNonExistant($this->email),
-            "Le nom d'utilisateur est déjà assigné à un utilisateur." => $this->usernameNonExistant($this->username),
+            "L'adresse mail est déjà assigné à un utilisateur." => $this->emailDoesNotExists($this->email),
+            "Le nom d'utilisateur est déjà assigné à un utilisateur." => $this->usernameDoesNotExists($this->username),
         );
 
         // Pour chaque vérification, si elle n'est pas validé stocker l'erreur dans la liste des erreurs rencontrées
@@ -45,9 +45,9 @@ class User{
             $condition ? "" : $erreurs[] = $description;
         }
 
-        if(!empty($erreurs))
+        if(!empty($errors))
         {
-            return $erreurs;
+            return $errors;
         }
 
         // code to insert the user in the database
@@ -58,13 +58,12 @@ class User{
         );
 
         $stmt = $this->pdo->getInst()->prepare($req);
-        // print_r($stmt);
         $stmt->execute();
 
         return True;
     }
 
-    public function supprime() : void
+    public function delete() : void
     {
         // code to delete the user from the database
         $req = sprintf("DELETE FROM `app_users` WHERE `users`.`id` = %s", 
@@ -75,47 +74,47 @@ class User{
         $stmt->execute();
     }
 
-    public function connexion() : array|bool
+    public function connection() : array|bool
     {
         // code to connect user
 
-        // Liste des erreurs rencontrées
-        $erreurs = [];
+        // encountered errors 
+        $errors = [];
 
-        // L'utilisateur peut choisir de se connecter avec son adresse mail ou son nom d'utilisateur
-        $identifiant = empty($this->username) ? $this->email : $this->username;
+        // User can connect with mail address or username
+        $identifier = empty($this->username) ? $this->email : $this->username;
 
         $req = sprintf("SELECT id, username, email, password, subscription_type, created_at FROM `app_users` WHERE email = %s OR username = %s", 
-            $this->pdo->getInst()->quote($identifiant), $this->pdo->getInst()->quote($identifiant)
+            $this->pdo->getInst()->quote($identifier), $this->pdo->getInst()->quote($identifier)
         );
         $stmt = $this->pdo->getInst()->prepare($req);
         $stmt->execute();
 
         $res = $stmt->fetch();
 
-        // Liste des vérifications locals
+        // List of local verifications
         $verifications = array(
             "L'adresse mail n'est pas valide." => filter_var($this->email, FILTER_VALIDATE_EMAIL),
             "L'identifiant n'est pas valide." => $res === false,
             "Le mot de passe est incorrect." => password_verify($this->password, $res["password"])
         );
 
-        // Pour chaque vérification, si elle n'est pas validé stocker l'erreur dans la liste des erreurs rencontrées
+        // For each verification, if is not validated, store the error in errors array
         foreach($verifications as $description => $condition)
         {
-            $condition ? "" : $erreurs[] = $description;
+            $condition ? "" : $errors[] = $description;
         }
 
-        if(!empty($erreurs))
+        if(!empty($errors))
         {
-            return $erreurs;
+            return $errors;
         }
 
         $_SESSION["user_id"] = $res["id"];
         return 1;
     }
 
-    public function metAjour() : void
+    public function update() : void
     {
         // code to update the user from the database
         $req = sprintf("UPDATE `app_users` SET `username` = %s, `email` = %s; `subscription_type` = %s, `created_at` = %s WHERE `users`.`id` = %s;", 
@@ -131,14 +130,14 @@ class User{
     }
 
     /**
-     * Vérifie qu'une adresse mail n'existe pas déjà dans la table des utilisateurs
+     * Verify that email address does not exists in the table
      * 
      * @param string $email
      * 
      * @access private
-     * @return bool True si l'adresse mail n'existe pas déjà ou False si elle existe déjà
+     * @return bool True if exist, False if not
      */
-    private function emailNonExistant(string $email) : bool
+    private function emailDoesNotExists(string $email) : bool
     {
         $req = sprintf("SELECT COUNT(*) FROM `app_users` WHERE `email` = %s", 
             $this->pdo->getInst()->quote($email)
@@ -151,14 +150,14 @@ class User{
     }
 
     /**
-     * Vérifie qu'un nom d'utilisateur n'existe pas déjà dans la table des utilisateurs
+     * Verify that a username does not exist in the users table
      * 
      * @param string $username
      * 
      * @access private
-     * @return bool True si le nom d'utilisateur n'existe pas déjà ou False si elle existe déjà
+     * @return bool True if exist or False if not
      */
-    private function usernameNonExistant(string $username) : bool
+    private function usernameDoesNotExists(string $username) : bool
     {
         $req = sprintf("SELECT COUNT(*) FROM `app_users` WHERE `username` = %s", 
             $this->pdo->getInst()->quote($username)

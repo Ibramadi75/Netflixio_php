@@ -3,7 +3,7 @@
   require_once dirname(__DIR__) . '/includes/class.MetteurEnScene.php';
   $bdd = new PdoApp();
   $mesc = new MetteurEnScene();
-  require __DIR__ . '\traitement\control_traitement.php';
+  require_once __DIR__ . '\traitement\control_traitement.php';
   ?>
 
 <!DOCTYPE html>
