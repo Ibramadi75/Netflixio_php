@@ -31,16 +31,9 @@ session_start();
 
 // require_once __DIR__ . '/includes/class.PdoNetflixio.php';
 require_once dirname(__DIR__) . '/includes/class.MetteurEnScene.php';
-require_once dirname(__DIR__) . '/app/controleurs/Controleur.php';
-require_once dirname(__DIR__) . '/app/models/PdoApp.php';
+require_once dirname(__DIR__) . '/app/lib/PdoApp.php';
 require_once dirname(__DIR__) . '/app/models/App.php';
 require_once dirname(__DIR__) . '/app/models/Erreur.php';
-
-// Crée une instance du contrôleur, du metteur en scène et du PDO 
-$ctrl = new Controleur(__DIR__);
-$mesc = new MetteurEnScene();
-$pdo = new PdoApp();
-
 
 ?>
 <style>
@@ -68,7 +61,7 @@ $pdo = new PdoApp();
 
 <body>
     <?php
-    require_once dirname(__DIR__) . "/route/Route.php";
+        require_once dirname(__DIR__) . "/app/controleurs/front/Home.php";
     ?>
 </body>
 
