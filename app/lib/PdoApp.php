@@ -6,6 +6,7 @@
 * @author Ibrahim Madi <ibrahim75madi@gmail.com>
 * @version 0
 */
+namespace App\lib;
 
 class PdoApp
 {
