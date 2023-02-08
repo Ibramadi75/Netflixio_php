@@ -7,6 +7,8 @@
 * @version 0
 */
 namespace App\lib;
+use PDO;
+use PDOException;
 
 class PdoApp
 {
