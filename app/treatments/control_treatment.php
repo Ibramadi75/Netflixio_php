@@ -1,7 +1,7 @@
 <?php
-if(isset($_POST['connexion_form'])){
-    require_once (__DIR__ . "\\traitement_connexion.php");
+if(isset($_POST['connectionForm'])){
+    require_once (__DIR__ . "\\connection_treatment.php");
 }
-elseif(isset($_POST['inscription_form'])){
-    require_once (__DIR__ . "\\traitement_inscription.php");
+elseif(isset($_POST['registerationForm'])){
+    require_once (__DIR__ . "\\registration_treatment.php");
 }

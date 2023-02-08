@@ -1,6 +1,10 @@
 {
     "cSpell.words": [
         "controleurs",
-        "deconnexion"
+        "deconnexion",
+        "encountered"
+    ],
+    "cSpell.ignoreWords": [
+        "verifications"
     ]
 }

@@ -1,23 +1,3 @@
-<script defer>
-    function erreur_animation() {
-        elements = document.getElementsByClassName("notif_erreur");
-        // console.log(el);
-        // el.style.animation = "notif_erreur 5s forwards";
-        // el.Style.backgroundColor = "blue";
-
-
-        var delay = 0;
-        // Or
-        [].forEach.call(elements, function(el) {
-            setTimeout(() => {
-                el.style.animation = "notif_erreur 5s forwards";
-                el.style.opacity = "1";
-            }, delay)
-            delay += 300;
-        });
-    }
-</script>
-
 <?php
 /**
  * Page index 
@@ -33,7 +13,7 @@ session_start();
 require_once dirname(__DIR__) . '/includes/class.MetteurEnScene.php';
 require_once dirname(__DIR__) . '/app/lib/PdoApp.php';
 require_once dirname(__DIR__) . '/app/models/App.php';
-require_once dirname(__DIR__) . '/app/models/Erreur.php';
+require_once dirname(__DIR__) . '/app/models/Error.php';
 
 ?>
 <style>
@@ -61,7 +41,7 @@ require_once dirname(__DIR__) . '/app/models/Erreur.php';
 
 <body>
     <?php
-        require_once dirname(__DIR__) . "/app/controleurs/front/Home.php";
+        require_once dirname(__DIR__) . "/app/controllers/front/Home.php";
     ?>
 </body>
 
@@ -82,5 +62,24 @@ require_once dirname(__DIR__) . '/app/models/Erreur.php';
             el_label.style.fontSize = "16px";
             el_label.style.top = "1em";
         }
+    }
+</script>
+<script defer>
+    function erreur_animation() {
+        elements = document.getElementsByClassName("notif_erreur");
+        // console.log(el);
+        // el.style.animation = "notif_erreur 5s forwards";
+        // el.Style.backgroundColor = "blue";
+
+
+        var delay = 0;
+        // Or
+        [].forEach.call(elements, function(el) {
+            setTimeout(() => {
+                el.style.animation = "notif_erreur 5s forwards";
+                el.style.opacity = "1";
+            }, delay)
+            delay += 300;
+        });
     }
 </script>
