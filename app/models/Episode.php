@@ -1,5 +1,8 @@
 <?php
 
+namespace App\Models;
+use App\lib\PdoApp;
+
 class Episodes{
     public function __construct(
         private int $id,

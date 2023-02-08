@@ -6,7 +6,8 @@
 * @version 0
 */
 
-require_once dirname(__DIR__) . '/lib/PdoApp.php';
+namespace App\Models;
+use App\lib\PdoApp;
 
 class App{
     private int|null $id;

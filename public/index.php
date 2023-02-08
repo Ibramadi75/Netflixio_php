@@ -10,10 +10,10 @@
 session_start();
 
 // require_once __DIR__ . '/includes/class.PdoNetflixio.php';
-require_once dirname(__DIR__) . '/includes/class.MetteurEnScene.php';
 require_once dirname(__DIR__) . '/app/lib/PdoApp.php';
 require_once dirname(__DIR__) . '/app/models/App.php';
-require_once dirname(__DIR__) . '/app/models/Error.php';
+require_once dirname(__DIR__) . '/app/models/Front_error.php';
+require_once dirname(__DIR__) . '/includes/Utility.php';
 
 ?>
 <style>
@@ -41,7 +41,7 @@ require_once dirname(__DIR__) . '/app/models/Error.php';
 
 <body>
     <?php
-        require_once dirname(__DIR__) . "/app/controllers/front/Home.php";
+        require_once(dirname(__DIR__) . "/app/controllers/Front/" . ucfirst(Utility::Router()) . ".php");
     ?>
 </body>
 
@@ -65,8 +65,8 @@ require_once dirname(__DIR__) . '/app/models/Error.php';
     }
 </script>
 <script defer>
-    function erreur_animation() {
-        elements = document.getElementsByClassName("notif_erreur");
+    function error_animation() {
+        elements = document.getElementsByClassName("notif_error");
         // console.log(el);
         // el.style.animation = "notif_erreur 5s forwards";
         // el.Style.backgroundColor = "blue";
@@ -76,7 +76,7 @@ require_once dirname(__DIR__) . '/app/models/Error.php';
         // Or
         [].forEach.call(elements, function(el) {
             setTimeout(() => {
-                el.style.animation = "notif_erreur 5s forwards";
+                el.style.animation = "notif_error 5s forwards";
                 el.style.opacity = "1";
             }, delay)
             delay += 300;

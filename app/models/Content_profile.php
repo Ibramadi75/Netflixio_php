@@ -1,5 +1,8 @@
 <?php
 
+namespace App\Models;
+use App\lib\PdoApp;
+
 class Contents_profiles{
     public function __construct(
         private int $id,

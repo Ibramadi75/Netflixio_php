@@ -1,3 +1,4 @@
 <?php
 
-dirname(__DIR__, 2) . "/vues/vueAccueil.php";
+require_once dirname(__DIR__, 2) . "/models/User.php";
+require_once dirname(__DIR__, 2) . "/views/viewHome.php";

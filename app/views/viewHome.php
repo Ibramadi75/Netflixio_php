@@ -1,11 +1,3 @@
-<?php
-  require_once dirname(__DIR__) . '/includes/class.PdoNetflixio.php';
-  require_once dirname(__DIR__) . '/includes/class.MetteurEnScene.php';
-  $bdd = new PdoApp();
-  $mesc = new MetteurEnScene();
-  require_once __DIR__ . '\traitement\control_traitement.php';
-  ?>
-
 <!DOCTYPE html>
 <html>
 

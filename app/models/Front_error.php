@@ -1,5 +1,8 @@
 <?php
 
+namespace App\Models;
+use App\lib\PdoApp;
+
 class FrontError {
     private string $description;
     private string $urlBackground;

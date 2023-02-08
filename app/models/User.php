@@ -6,6 +6,9 @@
 * @version 0
 */
 
+namespace App\Models;
+use App\lib\PdoApp;
+
 require_once dirname(__DIR__) . '/lib/PdoApp.php';
 class User{
     private PdoApp $pdo;

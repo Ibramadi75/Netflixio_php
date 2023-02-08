@@ -1,5 +1,8 @@
 <?php
 
+namespace App\Models;
+use App\lib\PdoApp;
+
 class User_watch_history{
     public function __construct(
         private int $id,
