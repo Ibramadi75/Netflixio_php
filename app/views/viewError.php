@@ -1,5 +1,5 @@
 <h1>
     <?php
-    echo $err->getCode();
+        echo $err->getCode();
     ?>
 </h1>

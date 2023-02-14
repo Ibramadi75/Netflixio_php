@@ -1,8 +1,10 @@
 <?php
 // Si l'utilisateur est connecté on ne lui affiche pas la page de connexion
 if(!isset($_SESSION["user_id"])):
-    require_once "composants/modHeader.php";
+    require_once __DIR__ . "/modules/modHeader.php";
+
 ?>
+<link rel="stylesheet" href="public/assets/styles/formulaires.css">
 <div class="container mainContainer">
     <div class="formulaire_container">
         <h1>S'identifier</h1>
@@ -19,7 +21,7 @@ if(!isset($_SESSION["user_id"])):
                 <input type="submit" name="connexion_form" value="S'identifier">
             </div>
         </form>
-        <a href="<?= $rootUrl ?>/inscription">S'inscrire</a>
+        <a href="<?= ROOT ?>/inscription">S'inscrire</a>
     </div>
 </div>
 <?php

@@ -1,6 +1,7 @@
 <?php
-    require "composants/header.php";
+    require "modules/modHeader.php";
 ?>
+<link rel="stylesheet" href="public/assets/styles/formulaires.css">
 <div class="container mainContainer">
     <div class="formulaire_container">
         <h1>S'inscrire</h1>
@@ -25,6 +26,6 @@
                 <input type="submit" name="inscription_form" value="S'identifier">
             </div>
         </form>
-        <a href="<?= $rootUrl ?>/connexion">Se connecter</a>
+        <a href="<?= ROOT ?>/connexion">Se connecter</a>
     </div>
 </div>
