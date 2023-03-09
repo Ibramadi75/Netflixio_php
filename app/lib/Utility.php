@@ -17,7 +17,9 @@ class Utility
 
         /*** ROUTES ***/
         $routes = match ($origine) {
-            "index.php", "/home", "/" => "home"
+            "connexion", "login" => "login",
+            "inscription", "register" => "register",
+            default => "home"
         };
 
         // disconnect user

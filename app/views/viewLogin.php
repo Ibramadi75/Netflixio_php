@@ -21,7 +21,7 @@ if(!isset($_SESSION["user_id"])):
                 <input type="submit" name="connexion_form" value="S'identifier">
             </div>
         </form>
-        <a href="<?= ROOT ?>/inscription">S'inscrire</a>
+        <a href="<?= $root ?>/inscription">S'inscrire</a>
     </div>
 </div>
 <?php
