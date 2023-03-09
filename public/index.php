@@ -13,7 +13,7 @@ session_start();
 require_once dirname(__DIR__) . '/app/lib/PdoApp.php';
 require_once dirname(__DIR__) . '/app/models/App.php';
 require_once dirname(__DIR__) . '/app/models/Front_error.php';
-require_once dirname(__DIR__) . '/includes/Utility.php';
+require_once dirname(__DIR__) . '/app/lib/Utility.php';
 
 ?>
 <style>

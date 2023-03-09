@@ -16,7 +16,7 @@
     </div>
   </div>
   <div style="position:relative;">
-    <img id="Netflixio_Logo" src="vues\assets\contents\Netflixio_Logo.png" alt="Logo netflixio">
+    <img id="Netflixio_Logo" src="public\assets\contents\Netflixio_Logo.png" alt="Logo netflixio">
   </div>
 </body>
 
